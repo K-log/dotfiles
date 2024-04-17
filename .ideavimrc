@@ -1,1 +1,84 @@
 source ~/.vimrc
+
+let mapleader = ' '
+
+set ideamarks
+set ideaput
+set idearefactormode=keep
+" Install the AceJump plugin
+Plug 'easymotion/vim-easymotion'
+
+Plug 'terryma/vim-multiple-cursors'
+
+"Plug 'tpope/vim-commentary'
+
+Plug 'tpope/vim-surround'
+
+Plug 'machakann/vim-highlightedyank'
+
+" Enable plugins
+
+" Can cause conflicts with mappings
+set surround
+
+set easymotion
+set multiple-cursors
+set highlightedyank
+set ReplaceWithRegister
+
+" Install the which-plugin in idea
+set which-key
+set notimeout
+
+let g:highlightedyank_highlight_duration = "1000"
+
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+let g:WhichKey_ShowVimActions = "true"
+
+nmap <leader>wd <Action>(CloseContent)
+nmap <leader>wu <Action>(Unsplit)
+nmap <leader>sh <Action>(SplitHorizontally)
+nmap <leader>sk <Action>(SplitVertically)
+nmap <leader>wm <Action>(MaximizeEditorInSplit)
+
+nmap <leader>as <Action>(SaveAll)
+nmap <leader>aa <Action>(SearchEverywhere)
+nmap <leader>am <Action>(EditorContextInfo)
+nmap <leader>ah <Action>(ShowHoverInfo)
+nmap <leader>ai <Action>(ShowIntentionActions)
+
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gf <Action>(GotoFile)
+
+map <leader>cl <Action>(CommentByLine)
+map <leader>cb <Action>(CommentByBlockComment)
+
+nmap <leader>fr <Action>(RecentFiles)
+nmap <leader>fl <Action>(RecentLocations)
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fn <Action>(NewFile)
+nmap <leader>fs <Action>(NewScratchFile)
+
+nmap <leader>bm <Action>(ToggleBookmark)
+nmap <leader>ba <Action>(ShowBookmarks)
+
+map <Leader>e <Action>(GotoNextError)
+map <leader>E <Action>(GotoPreviousError)
+
+inoremap jk <Esc>
+
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+vmap <S-J> <Action>(MoveLineDown)
+nmap <S-J> <Action>(MoveLineDown)
+vmap <S-K> <Action>(MoveLineUp)
+nmap <S-K> <Action>(MoveLineUp)
+
+nmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
