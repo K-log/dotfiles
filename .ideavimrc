@@ -1,70 +1,132 @@
 source ~/.vimrc
 
-let mapleader = ' '
-
 set ideamarks
 set ideaput
 set idearefactormode=keep
 " Install the AceJump plugin
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 
-Plug 'terryma/vim-multiple-cursors'
+"Plug 'terryma/vim-multiple-cursors'
 
 "Plug 'tpope/vim-commentary'
 
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
 
-Plug 'machakann/vim-highlightedyank'
+"Plug 'machakann/vim-highlightedyank'
 
 " Enable plugins
 
-" Can cause conflicts with mappings
+" Can cause conflicts with mappings for sneak
 set surround
 
+set sneak
 set easymotion
 set multiple-cursors
+set matchit
+
 set highlightedyank
-set ReplaceWithRegister
+let g:highlightedyank_highlight_duration = "800"
+
 
 " Install the which-plugin in idea
 set which-key
-set notimeout
-
-let g:highlightedyank_highlight_duration = "1000"
+set notimeout " this also applied to easymotion
 
 let g:WhichKey_SortOrder = "by_key_prefix_first"
 let g:WhichKey_ShowVimActions = "true"
 
-nmap <leader>wd <Action>(CloseContent)
-nmap <leader>wu <Action>(Unsplit)
-nmap <leader>sh <Action>(SplitHorizontally)
-nmap <leader>sk <Action>(SplitVertically)
-nmap <leader>wm <Action>(MaximizeEditorInSplit)
+let g:WhichKeyDesc_leader = "<leader> Leader key"
 
-nmap <leader>as <Action>(SaveAll)
-nmap <leader>aa <Action>(SearchEverywhere)
-nmap <leader>am <Action>(EditorContextInfo)
-nmap <leader>ah <Action>(ShowHoverInfo)
-nmap <leader>ai <Action>(ShowIntentionActions)
+let g:WhichKeyDesc_comment = "<leader>c Comment line"
 
-nmap <leader>gd <Action>(GotoDeclaration)
-nmap <leader>gi <Action>(GotoImplementation)
-nmap <leader>gf <Action>(GotoFile)
+let g:WhichKeyDesc_close_tab = "<leader>q Close tab"
 
-map <leader>cl <Action>(CommentByLine)
-map <leader>cb <Action>(CommentByBlockComment)
+let g:WhichKeyDesc_window = "<leader>w +Windows"
+let g:WhichKeyDesc_window_split_vert = "<leader>wv Split vertically"
+let g:WhichKeyDesc_window_split_horiz = "<leader>wh Split horizontally"
+let g:WhichKeyDesc_window_unsplit = "<leader>wu Unsplit"
+let g:WhichKeyDesc_window_move_to_opposite = "<leader>wm Move to opposite"
+let g:WhichKeyDesc_window_maximize_split = "<leader>we Maximize split"
 
-nmap <leader>fr <Action>(RecentFiles)
-nmap <leader>fl <Action>(RecentLocations)
-nmap <leader>ff <Action>(GotoFile)
-nmap <leader>fn <Action>(NewFile)
-nmap <leader>fs <Action>(NewScratchFile)
+let g:WhichKeyDesc_actions = "<leader>a +Actions"
+let g:WhichKeyDesc_actions_save_all = "<leader>as Save all"
+let g:WhichKeyDesc_actions_search_everywhere = "<leader>aa Search everywhere"
+let g:WhichKeyDesc_actions_editor_context_info = "<leader>am Editor context info"
+let g:WhichKeyDesc_actions_hover_info = "<leader>ah Show hover info"
+let g:WhichKeyDesc_actions_intentions = "<leader>ai Show intentions"
 
-nmap <leader>bm <Action>(ToggleBookmark)
-nmap <leader>ba <Action>(ShowBookmarks)
+let g:WhichKeyDesc_goto = "<leader>g +Goto"
+let g:WhichKeyDesc_goto_declaration = "<leader>gd Declaration"
+let g:WhichKeyDesc_goto_implementation = "<leader>gi Implementation"
+let g:WhichKeyDesc_goto_usages = "<leader>gu Usages"
+let g:WhichKeyDesc_goto_type_declarations = "<leader>gy Type declarations"
+let g:WhichKeyDesc_goto_back = "<leader>gb Back"
+let g:WhichKeyDesc_goto_forward = "<leader>gf Forward"
 
+let g:WhichKeyDesc_file = "<leader>f +File"
+let g:WhichKeyDesc_file_find = "<leader>ff Goto file"
+let g:WhichKeyDesc_file_recent_locations = "<leader>fl Recent locations"
+"let g:WhichKeDesc_file_recent = "<leader>fr Recent Files"
+let g:WhichKeyDesc_file_new = "<leader>fn New File"
+let g:WhichKeyDesc_file_scratch = "<leader>fs New Scratch File"
+let g:WhichKeyDesc_file_rename = "<leader>fc Rename"
+
+let g:WhichKeyDesc_bookmark = "<leader>b +Bookmark"
+let g:WhichKeyDesc_bookmark_toggle = "<leader>bm Toggle bookmark"
+let g:WhichKeyDesc_bookmark_show = "<leader>ba Show bookmarks"
+
+let g:WhichKeyDesc_errors_next = "<leader>e Goto next error"
+let g:WhichKeyDesc_errors_prev = "<leader>E Goto previous error"
+
+let g:WhichKeyDesc_refactor = "<leader>r +Refactor"
+let g:WhichKeyDesc_refactor_rename = "<leader>rn Rename element"
+
+" Close active tab
+map <leader>q <Action>(CloseContent)
+
+" Windows and splits
+map <leader>wu <Action>(Unsplit)
+map <leader>wh <Action>(SplitHorizontally)
+map <leader>wv <Action>(SplitVertically)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+map <leader>we <Action>(MaximizeEditorInSplit)
+
+" Actions
+map <leader>as <Action>(SaveAll)
+map <leader>aa <Action>(SearchEverywhere)
+map <leader>am <Action>(EditorContextInfo)
+map <leader>ah <Action>(ShowHoverInfo)
+map <leader>ai <Action>(ShowIntentionActions)
+
+" Goto
+map <leader>gd <Action>(GotoDeclaration)
+map <leader>gi <Action>(GotoImplementation)
+map <leader>gu <Action>(ShowUsages)
+map <leader>gy <Action>(GotoTypeDeclaration)
+map <leader>gb <Action>(Back)
+map <leader>gf <Action>(Forward)
+
+map <leader>c <Action>(CommentByLine)
+"map <leader>cb <Action>(CommentByBlockComment)
+
+" Files
+"nmap <leader>fr <Action>(RecentFiles)
+map <leader>fl <Action>(RecentLocations)
+map <leader>ff <Action>(GotoFile)
+map <leader>fn <Action>(NewFile)
+map <leader>fs <Action>(NewScratchFile)
+map <leader>fc <Action>(RenameFile)
+
+" Bookmarks
+map <leader>bm <Action>(ToggleBookmark)
+map <leader>ba <Action>(ShowBookmarks)
+
+" Errors
 map <Leader>e <Action>(GotoNextError)
 map <leader>E <Action>(GotoPreviousError)
+
+" Refactoring
+map <leader>rn <Action>(RenameElement)
 
 inoremap jk <Esc>
 
