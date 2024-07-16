@@ -15,11 +15,10 @@ set shiftwidth=2
 set autoindent
 
 set visualbell
-set autosave
 
 
 " use system keyboard
-set clipboard+=unnamed
+set clipboard+=unnamedplus
 
 " Homebrew - OSX only
 set rtp+=/opt/homebrew/opt/fzf

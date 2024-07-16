@@ -1,5 +1,6 @@
 source ~/.vimrc
 
+set autosave
 set ideamarks
 set ideaput
 set idearefactormode=keep
@@ -23,6 +24,7 @@ set sneak
 set easymotion
 set multiple-cursors
 set matchit
+set commentary
 
 set highlightedyank
 let g:highlightedyank_highlight_duration = "800"
@@ -37,9 +39,12 @@ let g:WhichKey_ShowVimActions = "true"
 
 let g:WhichKeyDesc_leader = "<leader> Leader key"
 
-let g:WhichKeyDesc_comment = "<leader>c Comment line"
+"let g:WhichKeyDesc_comment = "<leader>c Comment line"
 
 let g:WhichKeyDesc_close_tab = "<leader>q Close tab"
+
+let g:WhichKeyDesc_code = "<leader>c +Code"
+let g:WhichKeyDesc_code_eslint_fix = "<leader>cl Eslint fix"
 
 let g:WhichKeyDesc_window = "<leader>w +Windows"
 let g:WhichKeyDesc_window_split_vert = "<leader>wv Split vertically"
@@ -60,8 +65,9 @@ let g:WhichKeyDesc_goto_declaration = "<leader>gd Declaration"
 let g:WhichKeyDesc_goto_implementation = "<leader>gi Implementation"
 let g:WhichKeyDesc_goto_usages = "<leader>gu Usages"
 let g:WhichKeyDesc_goto_type_declarations = "<leader>gy Type declarations"
-let g:WhichKeyDesc_goto_back = "<leader>gb Back"
-let g:WhichKeyDesc_goto_forward = "<leader>gf Forward"
+let g:WhichKeyDesc_goto_back = "<leader>gh Back"
+let g:WhichKeyDesc_goto_forward = "<leader>gl Forward"
+let g:WhichKeyDesc_goto_content_in_path = "<leader>gf Find in path"
 
 let g:WhichKeyDesc_file = "<leader>f +File"
 let g:WhichKeyDesc_file_find = "<leader>ff Goto file"
@@ -80,9 +86,13 @@ let g:WhichKeyDesc_errors_prev = "<leader>E Goto previous error"
 
 let g:WhichKeyDesc_refactor = "<leader>r +Refactor"
 let g:WhichKeyDesc_refactor_rename = "<leader>rn Rename element"
+let g:WhichKeyDesc_refactor_introduce_var = "<leader>rv Introduce Local Variable"
 
 " Close active tab
 map <leader>q <Action>(CloseContent)
+
+" Code
+map <leader>cl <Action>(Javascript.Linters.EsLint.Fix)
 
 " Windows and splits
 map <leader>wu <Action>(Unsplit)
@@ -103,10 +113,11 @@ map <leader>gd <Action>(GotoDeclaration)
 map <leader>gi <Action>(GotoImplementation)
 map <leader>gu <Action>(ShowUsages)
 map <leader>gy <Action>(GotoTypeDeclaration)
-map <leader>gb <Action>(Back)
-map <leader>gf <Action>(Forward)
+map <leader>gh <Action>(Back)
+map <leader>gl <Action>(Forward)
+map <leader>gf <Action>(FindInPath)
 
-map <leader>c <Action>(CommentByLine)
+"map <leader>c <Action>(CommentByLine)
 "map <leader>cb <Action>(CommentByBlockComment)
 
 " Files
@@ -127,20 +138,16 @@ map <leader>E <Action>(GotoPreviousError)
 
 " Refactoring
 map <leader>rn <Action>(RenameElement)
+map <leader>rv <Action>(IntroduceVariable)
 
 inoremap jk <Esc>
 
-nmap <C-n> <Plug>NextWholeOccurrence
-xmap <C-n> <Plug>NextWholeOccurrence
-nmap g<C-n> <Plug>NextOccurrence
-xmap g<C-n> <Plug>NextOccurrence
-xmap <C-x> <Plug>SkipOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
+map <C-n> <Action>(SelectNextOccurrence)
+map <C-S-g> <Action>(SelectPreviousOccurrence)
+map <C-p> <Action>(RemoveOccurrence)
 
-vmap <S-J> <Action>(MoveLineDown)
-nmap <S-J> <Action>(MoveLineDown)
-vmap <S-K> <Action>(MoveLineUp)
-nmap <S-K> <Action>(MoveLineUp)
+map <S-J> <Action>(MoveLineDown)
+map <S-K> <Action>(MoveLineUp)
 
-nmap [[ <Action>(MethodUp)
-nmap ]] <Action>(MethodDown)
+map [[ <Action>(MethodUp)
+map ]] <Action>(MethodDown)
