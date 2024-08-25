@@ -45,6 +45,7 @@ let g:WhichKeyDesc_close_tab = "<leader>q Close tab"
 
 let g:WhichKeyDesc_code = "<leader>c +Code"
 let g:WhichKeyDesc_code_eslint_fix = "<leader>cl Eslint fix"
+let g:WhichKeyDesc_code_prettier_format = "<leader>cp Prettier format"
 
 let g:WhichKeyDesc_window = "<leader>w +Windows"
 let g:WhichKeyDesc_window_split_vert = "<leader>wv Split vertically"
@@ -93,6 +94,7 @@ map <leader>q <Action>(CloseContent)
 
 " Code
 map <leader>cl <Action>(Javascript.Linters.EsLint.Fix)
+map <leader>cp <Action>(ReformatWithPrettierAction)
 
 " Windows and splits
 map <leader>wu <Action>(Unsplit)
