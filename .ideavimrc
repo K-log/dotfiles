@@ -5,15 +5,15 @@ set ideamarks
 set ideaput
 set idearefactormode=keep
 " Install the AceJump plugin
-"Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 
-"Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 
-"Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 
-"Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
-"Plug 'machakann/vim-highlightedyank'
+Plug 'machakann/vim-highlightedyank'
 
 " Enable plugins
 
