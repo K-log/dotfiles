@@ -45,7 +45,11 @@ let g:WhichKeyDesc_close_tab = "<leader>q Close tab"
 
 let g:WhichKeyDesc_code = "<leader>c +Code"
 let g:WhichKeyDesc_code_eslint_fix = "<leader>cl Eslint fix"
+<<<<<<< Updated upstream
 let g:WhichKeyDesc_code_prettier_format = "<leader>cp Prettier format"
+=======
+let g:WhichKeyDesc_code_optimize_imports = "<leader>ci Optimize imports"
+>>>>>>> Stashed changes
 
 let g:WhichKeyDesc_window = "<leader>w +Windows"
 let g:WhichKeyDesc_window_split_vert = "<leader>wv Split vertically"
@@ -94,7 +98,11 @@ map <leader>q <Action>(CloseContent)
 
 " Code
 map <leader>cl <Action>(Javascript.Linters.EsLint.Fix)
+<<<<<<< Updated upstream
 map <leader>cp <Action>(ReformatWithPrettierAction)
+=======
+map <leader>ci <Action>(OptimizeImports)
+>>>>>>> Stashed changes
 
 " Windows and splits
 map <leader>wu <Action>(Unsplit)
@@ -145,7 +153,7 @@ map <leader>rv <Action>(IntroduceVariable)
 inoremap jk <Esc>
 
 map <C-n> <Action>(SelectNextOccurrence)
-map <C-S-g> <Action>(SelectPreviousOccurrence)
+map <C-S-n> <Action>(SelectPreviousOccurrence)
 map <C-p> <Action>(RemoveOccurrence)
 
 map <S-J> <Action>(MoveLineDown)
