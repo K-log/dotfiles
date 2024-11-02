@@ -1,38 +1,43 @@
 source ~/.vimrc
 
+" ---- Plugins ----
+"Plug 'easymotion/vim-easymotion'
+"Plug 'justinmk/vim-sneak'
+"Plug 'preservim/nerdtree'
+"Plug 'tpope/vim-surround'
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'tpope/vim-commentary'
+"Plug 'machakann/vim-highlightedyank'
+
+set multiple-cursors
+set matchit
+set commentary
+set surround " Can cause conflicts with mappings for sneak
+set sneak
+set multiple-cursors
+set matchit
+set commentary
+set quickscope
+set argtextobj
+set highlightedyank
+set easymotion
+set nerdtree
+set which-key
+set NERDTree
+
+" ---- IDEA vim settings ----
+
+set notimeout " this also applied to easymotion
 set autosave
 set ideamarks
 set ideaput
 set idearefactormode=keep
-" Install the AceJump plugin
-Plug 'easymotion/vim-easymotion'
 
-Plug 'terryma/vim-multiple-cursors'
+" ---- Plugin settings ----
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:argtextobj_pairs="[:],(:),<:>"
 
-Plug 'tpope/vim-commentary'
-
-Plug 'tpope/vim-surround'
-
-Plug 'machakann/vim-highlightedyank'
-
-" Enable plugins
-
-" Can cause conflicts with mappings for sneak
-set surround
-
-set sneak
-set easymotion
-set multiple-cursors
-set matchit
-set commentary
-
-set highlightedyank
 let g:highlightedyank_highlight_duration = "800"
-
-
-" Install the which-plugin in idea
-set which-key
-set notimeout " this also applied to easymotion
 
 let g:WhichKey_SortOrder = "by_key_prefix_first"
 let g:WhichKey_ShowVimActions = "true"
@@ -45,11 +50,8 @@ let g:WhichKeyDesc_close_tab = "<leader>q Close tab"
 
 let g:WhichKeyDesc_code = "<leader>c +Code"
 let g:WhichKeyDesc_code_eslint_fix = "<leader>cl Eslint fix"
-<<<<<<< Updated upstream
 let g:WhichKeyDesc_code_prettier_format = "<leader>cp Prettier format"
-=======
 let g:WhichKeyDesc_code_optimize_imports = "<leader>ci Optimize imports"
->>>>>>> Stashed changes
 
 let g:WhichKeyDesc_window = "<leader>w +Windows"
 let g:WhichKeyDesc_window_split_vert = "<leader>wv Split vertically"
@@ -81,6 +83,7 @@ let g:WhichKeyDesc_file_recent_locations = "<leader>fl Recent locations"
 let g:WhichKeyDesc_file_new = "<leader>fn New File"
 let g:WhichKeyDesc_file_scratch = "<leader>fs New Scratch File"
 let g:WhichKeyDesc_file_rename = "<leader>fc Rename"
+let g:WhichKeyDesc_nerdtree_toggle = "<leader>fe NERDTreeToggle"
 
 let g:WhichKeyDesc_bookmark = "<leader>b +Bookmark"
 let g:WhichKeyDesc_bookmark_toggle = "<leader>bm Toggle bookmark"
@@ -93,16 +96,16 @@ let g:WhichKeyDesc_refactor = "<leader>r +Refactor"
 let g:WhichKeyDesc_refactor_rename = "<leader>rn Rename element"
 let g:WhichKeyDesc_refactor_introduce_var = "<leader>rv Introduce Local Variable"
 
+
+" ---- IDEA vim keymaps ----
+
 " Close active tab
 map <leader>q <Action>(CloseContent)
 
 " Code
 map <leader>cl <Action>(Javascript.Linters.EsLint.Fix)
-<<<<<<< Updated upstream
 map <leader>cp <Action>(ReformatWithPrettierAction)
-=======
 map <leader>ci <Action>(OptimizeImports)
->>>>>>> Stashed changes
 
 " Windows and splits
 map <leader>wu <Action>(Unsplit)
@@ -137,6 +140,7 @@ map <leader>ff <Action>(GotoFile)
 map <leader>fn <Action>(NewFile)
 map <leader>fs <Action>(NewScratchFile)
 map <leader>fc <Action>(RenameFile)
+nmap <leader>fe :NERDTreeToggle<CR>
 
 " Bookmarks
 map <leader>bm <Action>(ToggleBookmark)
@@ -150,14 +154,26 @@ map <leader>E <Action>(GotoPreviousError)
 map <leader>rn <Action>(RenameElement)
 map <leader>rv <Action>(IntroduceVariable)
 
-inoremap jk <Esc>
+"map <C-n> <Action>(SelectNextOccurrence)
+"map <C-S-n> <Action>(SelectPreviousOccurrence)
+"map <C-p> <Action>(RemoveOccurrence)
 
-map <C-n> <Action>(SelectNextOccurrence)
-map <C-S-n> <Action>(SelectPreviousOccurrence)
-map <C-p> <Action>(RemoveOccurrence)
+nmap <leader><C-n> <Plug>AllWholeOccurrences
+xmap <leader><C-n> <Plug>AllWholeOccurrences
+nmap <leader>g<C-n> <Plug>AllOccurrences
+xmap <leader>g<C-n> <Plug>AllOccurrences
+
+nmap <leader><C-n> <Plug>AllWholeOccurrences
+xmap <leader><C-n> <Plug>AllWholeOccurrences
+nmap <leader>g<C-n> <Plug>AllOccurrences
+xmap <leader>g<C-n> <Plug>AllOccurrences
 
 map <S-J> <Action>(MoveLineDown)
 map <S-K> <Action>(MoveLineUp)
 
 map [[ <Action>(MethodUp)
 map ]] <Action>(MethodDown)
+
+nmap ds <Plug>Dsurround
+nmap cs <Plug>Csurround
+nmap ys <Plug>Ysurround
