@@ -2,6 +2,16 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		config = function()
+			local wk = require("which-key")
+			wk.add({
+        { "<leader>f", group = "[F]ile"},
+				{ "<leader>c", group = "[C]ode" },
+				{ "<leader>s", group = "[S]earch" },
+				{ "<leader>g", group = "[G]oto" },
+				{ "<leader>gw", group = "[W]orkspace" },
+			})
+		end,
 		opts = {
 			delay = 0,
 			icons = {
