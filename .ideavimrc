@@ -33,10 +33,10 @@ set ideamarks
 set ideaput
 set idearefactormode=keep
 
-
 " ---- Plugin settings ----
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:argtextobj_pairs="[:],(:),<:>"
+
 let g:highlightedyank_highlight_duration = "800"
 
 let g:WhichKey_SortOrder = "by_key_prefix_first"
