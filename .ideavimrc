@@ -96,6 +96,9 @@ let g:WhichKeyDesc_refactor = "<leader>r +Refactor"
 let g:WhichKeyDesc_refactor_rename = "<leader>rn Rename element"
 let g:WhichKeyDesc_refactor_introduce_var = "<leader>rv Introduce Local Variable"
 
+let g:WhichKeyDesc_occurrences_select_next = "<leader>Ctrl+n Select Next Occurrence"
+let g:WhichKeyDesc_occurrences_select_prev = "<leader>Ctrl+Shift+n Select Prev Occurrence"
+let g:WhichKeyDesc_occurrences_select_all = "<leader>gCtrl+n Select All Whole Occurrences"
 
 " ---- IDEA vim keymaps ----
 
@@ -154,19 +157,35 @@ map <leader>E <Action>(GotoPreviousError)
 map <leader>rn <Action>(RenameElement)
 map <leader>rv <Action>(IntroduceVariable)
 
-"map <C-n> <Action>(SelectNextOccurrence)
 "map <C-S-n> <Action>(SelectPreviousOccurrence)
 "map <C-p> <Action>(RemoveOccurrence)
 
-nmap <leader><C-n> <Plug>AllWholeOccurrences
-xmap <leader><C-n> <Plug>AllWholeOccurrences
-nmap <leader>g<C-n> <Plug>AllOccurrences
-xmap <leader>g<C-n> <Plug>AllOccurrences
+nmap g<C-n> <Plug>NextWholeOccurrence
+xmap g<C-n> <Plug>NextWholeOccurrence
+omap g<C-n> <Plug>NextWholeOccurrence
+nmap <C-n> <Plug>NextOccurrence
+xmap <C-n> <Plug>NextOccurrence
+omap <C-n> <Plug>NextOccurrence
+nmap <S-C-n> <Plug>PrevOccurrence
+xmap <S-C-n> <Plug>PrevOccurrence
+omap <S-C-n> <Plug>PrevOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
 
-nmap <leader><C-n> <Plug>AllWholeOccurrences
-xmap <leader><C-n> <Plug>AllWholeOccurrences
-nmap <leader>g<C-n> <Plug>AllOccurrences
-xmap <leader>g<C-n> <Plug>AllOccurrences
+" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
+" <A-n> is used to enter accented text, e.g., ñ
+nmap <S-C-n> <Plug>AllWholeOccurrences
+xmap <S-C-n> <Plug>AllWholeOccurrences
+omap <S-C-n> <Plug>AllWholeOccurrences
+nmap g<S-C-n> <Plug>AllOccurrences
+xmap g<S-C-n> <Plug>AllOccurrences
+omap g<S-C-n> <Plug>AllOccurrences
+
+
+"nmap <leader>g<C-n> <Plug>AllWholeOccurrences
+"xmap <leader>g<C-n> <Plug>AllWholeOccurrences
+"nmap <leader>gg<C-n> <Plug>AllOccurrences
+"xmap <leader>gg<C-n> <Plug>AllOccurrences
 
 map <S-J> <Action>(MoveLineDown)
 map <S-K> <Action>(MoveLineUp)
@@ -177,3 +196,11 @@ map ]] <Action>(MethodDown)
 nmap ds <Plug>Dsurround
 nmap cs <Plug>Csurround
 nmap ys <Plug>Ysurround
+
+
+
+test
+
+testing
+
+test

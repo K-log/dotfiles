@@ -51,9 +51,9 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-j> <C-w>j
 
 " use system keyboard
-"set clipboard+=unnamedplus
+set clipboard+=unnamedplus
 " Copy paste from system clipboard
-vmap <C-c> "+yi
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <C-r><C-o>+
+"vmap <C-c> "+yi
+"vmap <C-x> "+c
+"vmap <C-v> c<ESC>"+p
+"imap <C-v> <C-r><C-o>+
