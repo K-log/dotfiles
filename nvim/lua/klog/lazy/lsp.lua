@@ -38,7 +38,11 @@ return {
 			--    https://github.com/pmizio/typescript-tools.nvim
 			--
 			-- But for many setups, the LSP (`ts_ls`) will work just fine
-			ts_ls = {},
+			ts_ls = {
+				inlay_hint = true,
+			},
+
+			css_ls = {},
 			--
 
 			lua_ls = {
@@ -126,7 +130,6 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 			callback = function(event)
-
 				vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = event.buf, desc = "[C]ode [R]ename" })
 				vim.keymap.set(
 					{ "n", "x" },
@@ -134,7 +137,6 @@ return {
 					vim.lsp.buf.code_action,
 					{ buffer = event.buf, desc = "[C]ode [A]ction" }
 				)
-
 				-- The following two autocommands are used to highlight references of the
 				-- word under your cursor when your cursor rests there for a little while.
 				--    See `:help CursorHold` for information about when this is executed
@@ -169,9 +171,9 @@ return {
 				--
 				-- This may be unwanted, since they displace some of your code
 				if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-          vim.keymap.set("n", "<leader>ch", function()
+					vim.keymap.set("n", "<leader>ch", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-					end, { buffer=event.buf, desc = "Toggle [C]ode Inlay [H]ints"})
+					end, { buffer = event.buf, desc = "Toggle [C]ode Inlay [H]ints" })
 				end
 			end,
 		})

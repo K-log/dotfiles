@@ -14,4 +14,4 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_next, { desc = "Jump to nex
 vim.keymap.set("n", "<leader>E", vim.diagnostic.goto_prev, { desc = "Jump to prev diagnostic [E]rror" })
 vim.keymap.set("n", "<leader>fe", vim.cmd.Ex, { desc = "[F]iles [E]xplore" })
 vim.keymap.set("n", "<leader>fn", vim.cmd.enew, { desc = "[F]ile [N]ew" })
-vim.keymap.set("n", "<leader>cf", vim.cmd.Format, { desc = "[C]ode [F]ormat" })
+vim.keymap.set("n", "<leader>cp", vim.cmd.Format, { desc = "[C]ode [P]retty" })
