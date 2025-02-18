@@ -46,55 +46,14 @@ let g:WhichKeyDesc_leader = "<leader> Leader key"
 
 "let g:WhichKeyDesc_comment = "<leader>c Comment line"
 
-let g:WhichKeyDesc_close_tab = "<leader>q Close tab"
 
-let g:WhichKeyDesc_code = "<leader>c +Code"
-let g:WhichKeyDesc_code_eslint_fix = "<leader>cl Eslint fix"
-let g:WhichKeyDesc_code_prettier_format = "<leader>cp Prettier format"
-let g:WhichKeyDesc_code_optimize_imports = "<leader>ci Optimize imports"
-
-let g:WhichKeyDesc_window = "<leader>w +Windows"
-let g:WhichKeyDesc_window_split_vert = "<leader>wv Split vertically"
-let g:WhichKeyDesc_window_split_horiz = "<leader>wh Split horizontally"
-let g:WhichKeyDesc_window_unsplit = "<leader>wu Unsplit"
-let g:WhichKeyDesc_window_move_to_opposite = "<leader>wm Move to opposite"
-let g:WhichKeyDesc_window_maximize_split = "<leader>we Maximize split"
-
-let g:WhichKeyDesc_actions = "<leader>a +Actions"
-let g:WhichKeyDesc_actions_save_all = "<leader>as Save all"
-let g:WhichKeyDesc_actions_search_everywhere = "<leader>aa Search everywhere"
-let g:WhichKeyDesc_actions_editor_context_info = "<leader>am Editor context info"
-let g:WhichKeyDesc_actions_hover_info = "<leader>ah Show hover info"
-let g:WhichKeyDesc_actions_intentions = "<leader>ai Show intentions"
-
-let g:WhichKeyDesc_goto = "<leader>g +Goto"
-let g:WhichKeyDesc_goto_declaration = "<leader>gd Declaration"
-let g:WhichKeyDesc_goto_implementation = "<leader>gi Implementation"
-let g:WhichKeyDesc_goto_usages = "<leader>gu Usages"
-let g:WhichKeyDesc_goto_type_declarations = "<leader>gy Type declarations"
-let g:WhichKeyDesc_goto_back = "<leader>gh Back"
-let g:WhichKeyDesc_goto_forward = "<leader>gl Forward"
-let g:WhichKeyDesc_goto_content_in_path = "<leader>gf Find in path"
-
-let g:WhichKeyDesc_file = "<leader>f +File"
-let g:WhichKeyDesc_file_find = "<leader>ff Goto file"
-let g:WhichKeyDesc_file_recent_locations = "<leader>fl Recent locations"
-"let g:WhichKeDesc_file_recent = "<leader>fr Recent Files"
-let g:WhichKeyDesc_file_new = "<leader>fn New File"
-let g:WhichKeyDesc_file_scratch = "<leader>fs New Scratch File"
-let g:WhichKeyDesc_file_rename = "<leader>fc Rename"
-let g:WhichKeyDesc_nerdtree_toggle = "<leader>fe NERDTreeToggle"
-
-let g:WhichKeyDesc_bookmark = "<leader>b +Bookmark"
-let g:WhichKeyDesc_bookmark_toggle = "<leader>bm Toggle bookmark"
-let g:WhichKeyDesc_bookmark_show = "<leader>ba Show bookmarks"
+"let g:WhichKeyDesc_actions = "<leader>a +Actions"
+"let g:WhichKeyDesc_actions_save_all = "<leader>as Save all"
+"let g:WhichKeyDesc_actions_editor_context_info = "<leader>am Editor context info"
+"let g:WhichKeyDesc_actions_hover_info = "<leader>ah Show hover info"
 
 let g:WhichKeyDesc_errors_next = "<leader>e Goto next error"
 let g:WhichKeyDesc_errors_prev = "<leader>E Goto previous error"
-
-let g:WhichKeyDesc_refactor = "<leader>r +Refactor"
-let g:WhichKeyDesc_refactor_rename = "<leader>rn Rename element"
-let g:WhichKeyDesc_refactor_introduce_var = "<leader>rv Introduce Local Variable"
 
 let g:WhichKeyDesc_occurrences_select_next = "<leader>Ctrl+n Select Next Occurrence"
 let g:WhichKeyDesc_occurrences_select_prev = "<leader>Ctrl+Shift+n Select Prev Occurrence"
@@ -103,51 +62,102 @@ let g:WhichKeyDesc_occurrences_select_all = "<leader>gCtrl+n Select All Whole Oc
 " ---- IDEA vim keymaps ----
 
 " Close active tab
-map <leader>q <Action>(CloseContent)
 
 " Code
+let g:WhichKeyDesc_code = "<leader>c [C]ode"
+
+let g:WhichKeyDesc_code_eslint_fix = "<leader>cl [C]ode [L]int fix"
 map <leader>cl <Action>(Javascript.Linters.EsLint.Fix)
+
+let g:WhichKeyDesc_code_prettier_format = "<leader>cp [C]ode [P]retty"
 map <leader>cp <Action>(ReformatWithPrettierAction)
+
+let g:WhichKeyDesc_code_optimize_imports = "<leader>ci [C]ode optimize [I]mports"
 map <leader>ci <Action>(OptimizeImports)
 
+let g:WhichKeyDesc_code_actions = "<leader>ca [C]ode [A]ctions"
+map <leader>ca <Action>(ShowIntentionActions)
+
+let g:WhichKeyDesc_code_rename_element = "<leader>cr [C]ode [R]ename [E]lement"
+map <leader>cre <Action>(RenameElement)
+
+let g:WhichKeyDesc_code_rename_file = "<leader>cr [C]ode [R]ename [F]ile"
+map <leader>crf <Action>(RenameFile)
+
 " Windows and splits
+let g:WhichKeyDesc_window = "<leader>w [W]indows"
+
+let g:WhichKeyDesc_window_unsplit = "<leader>wu [W]indow [U]nsplit"
 map <leader>wu <Action>(Unsplit)
+
+let g:WhichKeyDesc_window_split_horiz = "<leader>wh [W]indow split [H]orizontally"
 map <leader>wh <Action>(SplitHorizontally)
+
+let g:WhichKeyDesc_window_split_vert = "<leader>wv [W]indow split [V]ertically"
 map <leader>wv <Action>(SplitVertically)
+
+let g:WhichKeyDesc_window_move_to_opposite = "<leader>wm [W]indow [M]ove to opposite"
 map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+
+let g:WhichKeyDesc_window_maximize_split = "<leader>we [W]indow [E]xpand split"
 map <leader>we <Action>(MaximizeEditorInSplit)
 
+
+let g:WhichKeyDesc_window_close = "<leader>wq [W]indow [Q]ui"
+map <leader>wq <Action>(CloseContent)
+
 " Actions
-map <leader>as <Action>(SaveAll)
-map <leader>aa <Action>(SearchEverywhere)
-map <leader>am <Action>(EditorContextInfo)
-map <leader>ah <Action>(ShowHoverInfo)
-map <leader>ai <Action>(ShowIntentionActions)
+"map <leader>am <Action>(EditorContextInfo)
+"map <leader>ah <Action>(ShowHoverInfo)
 
 " Goto
+let g:WhichKeyDesc_goto = "<leader>g [G]oto"
+
+let g:WhichKeyDesc_goto_definition = "<leader>gd [G]oto [D]efinitions"
 map <leader>gd <Action>(GotoDeclaration)
+
+let g:WhichKeyDesc_goto_implementation = "<leader>gi [G]oto [I]mplementations"
 map <leader>gi <Action>(GotoImplementation)
-map <leader>gu <Action>(ShowUsages)
+
+let g:WhichKeyDesc_goto_references = "<leader>gr [G]oto [R]eferences"
+map <leader>gr <Action>(ShowUsages)
+
+let g:WhichKeyDesc_goto_type_definition = "<leader>gy [G]oto [T]ype definition"
 map <leader>gy <Action>(GotoTypeDeclaration)
-map <leader>gh <Action>(Back)
-map <leader>gl <Action>(Forward)
-map <leader>gf <Action>(FindInPath)
+
+let g:WhichKeyDesc_goto_type_symbol = "<leader>gs [G]oto [S]ymbols"
+map <leader>gs <Action>(GotoSymbol)
+
+
 
 "map <leader>c <Action>(CommentByLine)
 "map <leader>cb <Action>(CommentByBlockComment)
 
 " Files
-"nmap <leader>fr <Action>(RecentFiles)
-map <leader>fl <Action>(RecentLocations)
-map <leader>ff <Action>(GotoFile)
-map <leader>fn <Action>(NewFile)
-map <leader>fs <Action>(NewScratchFile)
-map <leader>fc <Action>(RenameFile)
-nmap <leader>fe :NERDTreeToggle<CR>
+let g:WhichKeyDesc_search = "<leader>s [S]earch"
 
-" Bookmarks
-map <leader>bm <Action>(ToggleBookmark)
-map <leader>ba <Action>(ShowBookmarks)
+let g:WhichKeyDesc_search_current_word = "<leader>sw [S]earch current [W]ord"
+map <leader>sw <Action>(FindInPath)
+
+let g:WhichKeyDesc_search_current_word = "<leader>s. [S]earch recent files ("." for repeat)"
+map <leader>s. <Action>(RecentLocations)
+
+let g:WhichKeyDesc_search_files = "<leader>sf [S]earch [S]elect files"
+map <leader>ss <Action>(GotoFile)
+
+"map <leader>fn <Action>(NewFile)
+"map <leader>fs <Action>(NewScratchFile)
+"map <leader>fc <Action>(RenameFile)
+"nmap <leader>fe :NERDTreeToggle<CR>
+
+" Harpoon (Bookmarks)
+let g:WhichKeyDesc_harpoon = "<leader>h [H]arpoon"
+
+let g:WhichKeyDesc_harpoon_toggle = "<leader>ht [H]arpoon [T]oggle"
+map <leader>ht <Action>(ToggleBookmark)
+
+"let g:WhichKeyDesc_harpoon_show = "<leader>ba Show bookmarks"
+map <leader>ha <Action>(ShowBookmarks)
 
 " Errors
 map <Leader>e <Action>(GotoNextError)
@@ -196,11 +206,3 @@ map ]] <Action>(MethodDown)
 nmap ds <Plug>Dsurround
 nmap cs <Plug>Csurround
 nmap ys <Plug>Ysurround
-
-
-
-test
-
-testing
-
-test
