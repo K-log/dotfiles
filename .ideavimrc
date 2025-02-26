@@ -102,7 +102,6 @@ map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
 let g:WhichKeyDesc_window_maximize_split = "<leader>we [W]indow [E]xpand split"
 map <leader>we <Action>(MaximizeEditorInSplit)
 
-
 let g:WhichKeyDesc_window_close = "<leader>wq [W]indow [Q]ui"
 map <leader>wq <Action>(CloseContent)
 
