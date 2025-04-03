@@ -13,7 +13,7 @@ set multiple-cursors
 set matchit
 set commentary
 set surround " Can cause conflicts with mappings for sneak
-set sneak
+"set sneak
 set multiple-cursors
 set matchit
 set commentary
@@ -44,20 +44,9 @@ let g:WhichKey_ShowVimActions = "true"
 
 let g:WhichKeyDesc_leader = "<leader> Leader key"
 
-"let g:WhichKeyDesc_comment = "<leader>c Comment line"
-
-
-"let g:WhichKeyDesc_actions = "<leader>a +Actions"
-"let g:WhichKeyDesc_actions_save_all = "<leader>as Save all"
-"let g:WhichKeyDesc_actions_editor_context_info = "<leader>am Editor context info"
-"let g:WhichKeyDesc_actions_hover_info = "<leader>ah Show hover info"
-
 let g:WhichKeyDesc_errors_next = "<leader>e Goto next error"
 let g:WhichKeyDesc_errors_prev = "<leader>E Goto previous error"
 
-let g:WhichKeyDesc_occurrences_select_next = "<leader>Ctrl+n Select Next Occurrence"
-let g:WhichKeyDesc_occurrences_select_prev = "<leader>Ctrl+Shift+n Select Prev Occurrence"
-let g:WhichKeyDesc_occurrences_select_all = "<leader>gCtrl+n Select All Whole Occurrences"
 
 " ---- IDEA vim keymaps ----
 
@@ -105,10 +94,6 @@ map <leader>we <Action>(MaximizeEditorInSplit)
 let g:WhichKeyDesc_window_close = "<leader>wq [W]indow [Q]ui"
 map <leader>wq <Action>(CloseContent)
 
-" Actions
-"map <leader>am <Action>(EditorContextInfo)
-"map <leader>ah <Action>(ShowHoverInfo)
-
 " Goto
 let g:WhichKeyDesc_goto = "<leader>g [G]oto"
 
@@ -127,11 +112,6 @@ map <leader>gy <Action>(GotoTypeDeclaration)
 let g:WhichKeyDesc_goto_type_symbol = "<leader>gs [G]oto [S]ymbols"
 map <leader>gs <Action>(GotoSymbol)
 
-
-
-"map <leader>c <Action>(CommentByLine)
-"map <leader>cb <Action>(CommentByBlockComment)
-
 " Files
 let g:WhichKeyDesc_search = "<leader>s [S]earch"
 
@@ -143,11 +123,6 @@ map <leader>s. <Action>(RecentLocations)
 
 let g:WhichKeyDesc_search_files = "<leader>sf [S]earch [S]elect files"
 map <leader>ss <Action>(GotoFile)
-
-"map <leader>fn <Action>(NewFile)
-"map <leader>fs <Action>(NewScratchFile)
-"map <leader>fc <Action>(RenameFile)
-"nmap <leader>fe :NERDTreeToggle<CR>
 
 " Harpoon (Bookmarks)
 let g:WhichKeyDesc_harpoon = "<leader>h [H]arpoon"
@@ -162,39 +137,36 @@ map <leader>ha <Action>(ShowBookmarks)
 map <Leader>e <Action>(GotoNextError)
 map <leader>E <Action>(GotoPreviousError)
 
-" Refactoring
-map <leader>rn <Action>(RenameElement)
-map <leader>rv <Action>(IntroduceVariable)
-
-"map <C-S-n> <Action>(SelectPreviousOccurrence)
-"map <C-p> <Action>(RemoveOccurrence)
-
-nmap g<C-n> <Plug>NextWholeOccurrence
-xmap g<C-n> <Plug>NextWholeOccurrence
-omap g<C-n> <Plug>NextWholeOccurrence
+let g:WhichKeyDesc_occurrences_select_next = "Ctrl+n Select Next Occurrence"
 nmap <C-n> <Plug>NextOccurrence
 xmap <C-n> <Plug>NextOccurrence
 omap <C-n> <Plug>NextOccurrence
+
+let g:WhichKeyDesc_occurrences_select_prev = "Shift+Ctrl+n Select Prev Occurrence"
 nmap <S-C-n> <Plug>PrevOccurrence
 xmap <S-C-n> <Plug>PrevOccurrence
 omap <S-C-n> <Plug>PrevOccurrence
-xmap <C-x> <Plug>SkipOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
 
-" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
-" <A-n> is used to enter accented text, e.g., ñ
-nmap <S-C-n> <Plug>AllWholeOccurrences
-xmap <S-C-n> <Plug>AllWholeOccurrences
-omap <S-C-n> <Plug>AllWholeOccurrences
-nmap g<S-C-n> <Plug>AllOccurrences
-xmap g<S-C-n> <Plug>AllOccurrences
-omap g<S-C-n> <Plug>AllOccurrences
+let g:WhichKeyDesc_occurrences_next_whole = "Ctrl+m Select Next Whole Occurrences"
+nmap g<C-n> <Plug>NextWholeOccurrence
+xmap g<C-n> <Plug>NextWholeOccurrence
+omap g<C-n> <Plug>NextWholeOccurrence
 
+let g:WhichKeyDesc_occurrences_next_whole = "Ctrl+m Select Next Whole Occurrences"
+nmap <C-m> <Plug>PrevWholeOccurrence
+xmap <C-m> <Plug>PrevWholeOccurrence
+omap <C-m> <Plug>PrevWholeOccurrence
 
-"nmap <leader>g<C-n> <Plug>AllWholeOccurrences
-"xmap <leader>g<C-n> <Plug>AllWholeOccurrences
-"nmap <leader>gg<C-n> <Plug>AllOccurrences
-"xmap <leader>gg<C-n> <Plug>AllOccurrences
+let g:WhichKeyDesc_occurrences_skip = "Ctrl+j Skip Occurrence"
+xmap <C-j> <Plug>SkipOccurrence
+
+let g:WhichKeyDesc_occurrences_remove= "Ctrl+x Remove Occurrence"
+xmap <C-x> <Plug>RemoveOccurrence
+
+let g:WhichKeyDesc_occurrences_next_whole = "gCtrl+n Select All Whole Occurrences"
+nmap g<C-n> <Plug>AllWholeOccurrences
+xmap g<C-n> <Plug>AllWholeOccurrences
+omap g<C-n> <Plug>AllWholeOccurrences
 
 map <S-J> <Action>(MoveLineDown)
 map <S-K> <Action>(MoveLineUp)
@@ -202,6 +174,6 @@ map <S-K> <Action>(MoveLineUp)
 map [[ <Action>(MethodUp)
 map ]] <Action>(MethodDown)
 
-nmap ds <Plug>Dsurround
-nmap cs <Plug>Csurround
-nmap ys <Plug>Ysurround
+"nmap ds <Plug>Dsurround
+"nmap cs <Plug>Csurround
+"nmap ys <Plug>Ysurround

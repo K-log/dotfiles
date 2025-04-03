@@ -4,11 +4,20 @@ return {
 		config = function()
 			local util = require("formatter.util")
 			local formatter = require("formatter")
+
+			local function eslintFormat()
+				return {
+					exe = "eslint_d",
+					args = { "--fix", "--stdin", "--stdin-filename", vim.api.nvim_buf_get_name(0) },
+					stdin = true,
+				}
+			end
+
 			formatter.setup({
 				-- Enable or disable logging
 				logging = true,
 				-- Set the log level
-				log_level = vim.log.levels.WARN,
+				log_level = vim.log.levels.INFO,
 				-- All formatter configurations are opt-in
 				filetype = {
 					-- Formatter configurations for filetype "lua" go here
@@ -41,7 +50,21 @@ return {
 						end,
 					},
 
+					javascript = {
+						eslintFormat,
+					},
 
+					typescript = {
+						eslintFormat,
+					},
+
+					javascriptreact = {
+						eslintFormat,
+					},
+
+					typescriptreact = {
+						eslintFormat,
+					},
 					-- Use the special "*" filetype for defining formatter configurations on
 					-- any filetype
 					["*"] = {

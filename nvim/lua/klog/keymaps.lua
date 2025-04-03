@@ -11,7 +11,7 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 vim.keymap.set("n", "<C-S-l>", vim.cmd.bnext, { desc = "Next buffer" })
 vim.keymap.set("n", "<C-S-h>", vim.cmd.bprev, { desc = "Previous buffer" })
-vim.keymap.set("n", "<C-S-q>", vim.cmd.bclose, { desc = "Close current buffer" })
+vim.keymap.set("n", "<C-S-q>", vim.cmd.bdelete, { desc = "Close current buffer" })
 
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_next, { desc = "Jump to next diagnostic [e]rror" })

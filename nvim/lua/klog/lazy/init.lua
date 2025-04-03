@@ -11,6 +11,15 @@ return {
 			},
 		},
 	},
+	-- { -- Bufferline
+	-- 	"akinsho/bufferline.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- },
+	{
+		"mg979/vim-visual-multi",
+	},
 	{
 		"folke/todo-comments.nvim",
 		event = "VimEnter",
