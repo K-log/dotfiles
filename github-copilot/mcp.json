@@ -1,0 +1,20 @@
+{
+    "servers": {
+        // add your MCP stdio servers configuration here
+        // example:
+        // "my-mcp-server": {
+        //     "type": "stdio",
+        //     "command": "my-command",
+        //     "args": [],
+        //     "env": {
+        //         "TOKEN": "my_token"
+        //     }
+        // }
+        "playwright": {
+            "command": "npx",
+            "args": [
+                "@playwright/mcp@latest"
+            ]
+        }
+    }
+}
