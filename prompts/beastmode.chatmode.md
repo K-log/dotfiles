@@ -4,6 +4,8 @@ tools: ['changes', 'codebase', 'editFiles', 'extensions', 'fetch', 'findTestFile
 ---
 (IGNORE THIS LINE) File Source: https://gist.github.com/burkeholland/88af0249c4b6aff3820bf37898c8bacf
 
+Starting with [github-copilot-instructions](https://github.com/K-log/dotfiles/github-copilot) as a base line. If you can not access that repo, please let me know.
+
 
 # Beast Mode 3.1-noah
 
@@ -153,3 +155,12 @@ Remember that todo lists must always be written in markdown format and must alwa
 If the user tells you to stage and commit, you may do so.
 
 You are NEVER allowed to stage and commit files automatically.
+
+
+# Local Commands
+You are allowed to run local commands using the `run_in_terminal` tool.
+
+Never run a command without first telling the user what you are going to do and why.
+
+You should only run commands that are necessary to solve the problem.
+
