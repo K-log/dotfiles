@@ -11,6 +11,23 @@ return {
 			},
 		},
 	},
+	{ "tpope/vim-commentary" }, -- commentary like IdeaVim
+	{ "unblevable/quick-scope" }, -- quickscope highlighting f/F/t/T targets
+	{ "easymotion/vim-easymotion" }, -- EasyMotion navigation
+	{ -- file tree (NERDTree analog)
+		"nvim-tree/nvim-tree.lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
+		keys = {
+			{ "<leader>nt", ":NvimTreeToggle<CR>", desc = "[N]vim [T]ree toggle" },
+		},
+		opts = {
+			discard_open_buffers = true,
+			update_focused_file = { enable = true },
+			renderer = { highlight_git = true, group_empty = true },
+			view = { width = 36 },
+		},
+	},
 	-- { -- Bufferline
 	-- 	"akinsho/bufferline.nvim",
 	-- 	dependencies = {
@@ -63,4 +80,9 @@ return {
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
 	},
+		{ -- Treesitter textobjects (argument/parameter objects similar to argtextobj)
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			dependencies = { "nvim-treesitter/nvim-treesitter" },
+			lazy = true,
+		},
 }

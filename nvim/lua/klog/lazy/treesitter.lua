@@ -24,5 +24,15 @@ return {
 			additional_vim_regex_highlighting = {},
 		},
 		indent = { enable = true, disable = {} },
+		textobjects = {
+			select = {
+				enable = true,
+				lookahead = true,
+				keymaps = {
+					["aa"] = "@parameter.outer",
+					["ia"] = "@parameter.inner",
+				},
+			},
+		},
 	},
 }
