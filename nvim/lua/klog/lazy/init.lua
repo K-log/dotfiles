@@ -22,7 +22,6 @@ return {
 			{ "<leader>nt", ":NvimTreeToggle<CR>", desc = "[N]vim [T]ree toggle" },
 		},
 		opts = {
-			discard_open_buffers = true,
 			update_focused_file = { enable = true },
 			renderer = { highlight_git = true, group_empty = true },
 			view = { width = 36 },
