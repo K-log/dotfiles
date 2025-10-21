@@ -1,4 +1,4 @@
-set relativenumber number
+set number
 set showmode
 set colorcolumn=80
 set scrolloff=15

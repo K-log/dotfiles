@@ -24,5 +24,20 @@ return {
 			additional_vim_regex_highlighting = {},
 		},
 		indent = { enable = true, disable = {} },
+		textobjects = {
+			select = {
+				enable = true,
+				lookahead = true,
+				keymaps = {
+					["aa"] = "@parameter.outer",
+					["ia"] = "@parameter.inner",
+				},
+			},
+		},
 	},
+  { -- Treesitter textobjects (argument/parameter objects similar to argtextobj)
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    lazy = true,
+  },
 }
