@@ -63,4 +63,10 @@ return {
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
 	},
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({})
+    end,
+  },
 }
