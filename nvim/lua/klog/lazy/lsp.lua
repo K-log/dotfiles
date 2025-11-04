@@ -54,6 +54,10 @@ return {
 						completion = {
 							callSnippet = "Replace",
 						},
+								runtime = { version = "LuaJIT" },
+								diagnostics = {
+									globals = { "vim", "it", "describe", "before_each", "after_each" },
+								},
 						-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 						-- diagnostics = { disable = { 'missing-fields' } },
 					},
@@ -69,16 +73,16 @@ return {
 		})
 
 		require("mason-lspconfig").setup({
+			automatic_enable = true,
 			handlers = {
 				function(server_name) -- default handler (optional)
 					local server = servers[server_name] or {}
 					server.capabilities = vim.tbl_deep_extend("force", {}, lsp_capabilities, server.capabilities or {})
-					require("lspconfig")[server_name].setup(server)
+					vim.lsp.config(server_name, server)
 				end,
 
 				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup({
+					vim.lsp.config("lua_ls", {
 						capabilities = lsp_capabilities,
 						settings = {
 							Lua = {
@@ -110,7 +114,7 @@ return {
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" }, -- For luasnip users.
-        { name = "supermaven" }
+				{ name = "supermaven" },
 			}, {
 				{ name = "buffer" },
 			}),

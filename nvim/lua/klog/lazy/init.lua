@@ -25,14 +25,21 @@ return {
 			update_focused_file = { enable = true },
 			renderer = { highlight_git = true, group_empty = true },
 			view = { width = 36 },
+			tab = {
+				sync = {
+					open = true,
+					close = true,
+					ignore = {},
+				},
+			},
 		},
 	},
-	-- { -- Bufferline
-	-- 	"akinsho/bufferline.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-tree/nvim-web-devicons",
-	-- 	},
-	-- },
+	{ -- Bufferline
+		"akinsho/bufferline.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
 	{
 		"mg979/vim-visual-multi",
 	},
@@ -79,10 +86,10 @@ return {
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
 	},
-  {
-    "supermaven-inc/supermaven-nvim",
-    config = function()
-      require("supermaven-nvim").setup({})
-    end,
-  },
+	{
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			require("supermaven-nvim").setup({})
+		end,
+	},
 }

@@ -43,7 +43,9 @@ vim.keymap.set("n", "<leader>cre", vim.lsp.buf.rename, { desc = "[C]ode [R]ename
 vim.keymap.set("n", "<leader>crf", function()
 	local old = vim.api.nvim_buf_get_name(0)
 	local new = vim.fn.input("Rename file: ", old, "file")
-	if new == nil or new == "" or new == old then return end
+	if new == nil or new == "" or new == old then
+		return
+	end
 	vim.cmd(string.format("saveas %s", vim.fn.fnameescape(new)))
 	os.remove(old)
 	vim.cmd("bdelete #")
