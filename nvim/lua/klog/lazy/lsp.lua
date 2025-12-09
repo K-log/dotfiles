@@ -54,10 +54,10 @@ return {
 						completion = {
 							callSnippet = "Replace",
 						},
-								runtime = { version = "LuaJIT" },
-								diagnostics = {
-									globals = { "vim", "it", "describe", "before_each", "after_each" },
-								},
+						runtime = { version = "LuaJIT" },
+						diagnostics = {
+							globals = { "vim", "it", "describe", "before_each", "after_each" },
+						},
 						-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 						-- diagnostics = { disable = { 'missing-fields' } },
 					},
