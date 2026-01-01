@@ -1,0 +1,15 @@
+[user]
+	email = "noahb343@gmail.com"
+	name = "Noah Dommaschk Burwell"
+
+[init]
+	defaultBranch = "main"
+
+[core]
+	excludesFile = "~/.gitignore_global"
+
+[push]
+	autoSetupRemote = true
+
+[commit]
+  gpgsign = true
