@@ -96,9 +96,24 @@ in
     packages = with pkgs; [
       home-manager	
       kdePackages.kate
-    #  thunderbird
     ];
   };
+
+
+  fonts = {
+    packages = [ 
+      pkgs.nerd-fonts.jetbrains-mono
+    ];
+    fontconfig = {
+      enable = true;
+      allowBitmaps = true;
+      defaultFonts = {
+        monospace = [ "JetBrainsMono" ];
+      };
+    };
+  };
+
+  console.font = "JetBrainsMono";
 
   # home-manager.backupFileExtension = ".bak";
   # home-manager.users.noah = {
@@ -142,7 +157,7 @@ in
     ohMyZsh = {
       enable = true;
       theme = "agnoster";
-      plugins = [ "git" "z" ];
+      plugins = [ "git" "z" "fzf" "nvm" "urltools" ];
       customPkgs = [
         pkgs.nix-zsh-completions
       ];
