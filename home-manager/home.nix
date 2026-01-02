@@ -55,6 +55,7 @@
     pkgs.javaPackages.compiler.openjdk21
     pkgs.luajit_2_0
     pkgs.luajitPackages.luarocks
+    pkgs.love
     pkgs.gcc
     pkgs.gnumake
     pkgs.gnused
