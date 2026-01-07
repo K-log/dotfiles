@@ -139,5 +139,5 @@ Naming and deliverable standards:
   3. Estimated Time Saved: [X minutes]
   4. Prompt: [Description of the task or instruction]
   5. Response: [Details of the implementation or output]
-  6. Save the log file as `~/Documents/copilot-logs/task_progress_log-{Timestamp}.txt`.
-  7. Never save or create a log file outside of `~/Documents/copilot-logs/task_progress_log-{Timestamp}.txt`
+  6. Save the log file as `~/Documents/zv-notes/copilot-logs/task_progress_log-{Timestamp}.md`.
+  7. Never save or create a log file outside of `~/Documents/zv-notes/copilot-logs/task_progress_log-{Timestamp}.md`
