@@ -127,6 +127,7 @@ Naming and deliverable standards:
 - Generate only a single log file per day.
 - Append each new log into the log file for the current day.
 - Print the log into the chat whenever it is saved to the file.
+- Format all log files as markdown.
 - The log file should include the following details for each step:
   1. Timestamp: The exact time when the step was initiated.
   2. Time Taken: The duration it took to complete the step.
