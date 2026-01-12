@@ -1,5 +1,6 @@
 # Dotfiles
 
+Looking for Nix configs? Checkout the Nix branch! https://github.com/K-log/dotfiles/tree/nix-setup-framework
 
 
 ## Setup
