@@ -123,6 +123,7 @@ Naming and deliverable standards:
 
 ### Track every task
 
+- If you can not create a log file on the first attempt, print the log into the chat and continue with that task.
 - Generate a log file to track the progress of my current task.
 - Generate only a single log file per day.
 - Append each new log into the log file for the current day.
