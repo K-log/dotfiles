@@ -13,6 +13,14 @@ return {
 				}
 			end
 
+			local function prettierFormat()
+				return {
+					exe = "prettier",
+					args = { "--stdin-filepath", util.escape_path(util.get_current_buffer_file_path()), "--", "-" },
+					stdin = true,
+				}
+			end
+
 			formatter.setup({
 				-- Enable or disable logging
 				logging = true,
@@ -52,18 +60,22 @@ return {
 
 					javascript = {
 						eslintFormat,
+            prettierFormat,
 					},
 
 					typescript = {
 						eslintFormat,
+            prettierFormat,
 					},
 
 					javascriptreact = {
 						eslintFormat,
+            prettierFormat,
 					},
 
 					typescriptreact = {
 						eslintFormat,
+            prettierFormat,
 					},
 					-- Use the special "*" filetype for defining formatter configurations on
 					-- any filetype
@@ -75,5 +87,5 @@ return {
 				},
 			})
 		end,
+  }
 	},
-}
