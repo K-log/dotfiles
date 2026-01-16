@@ -50,7 +50,7 @@ return {
 		opts = { signs = false },
 	},
 	{ -- Collection of various small independent plugins/modules
-		"echasnovski/mini.nvim",
+		"nvim-mini/mini.nvim",
 		config = function()
 			-- Better Around/Inside textobjects
 			--
@@ -85,6 +85,13 @@ return {
 			-- ... and there is more!
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
+	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" },
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {},
 	},
 	{
 		"supermaven-inc/supermaven-nvim",

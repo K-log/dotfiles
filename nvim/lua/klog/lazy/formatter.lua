@@ -77,6 +77,11 @@ return {
 						eslintFormat,
             prettierFormat,
 					},
+
+          markdown = {
+            prettierFormat,
+          },
+
 					-- Use the special "*" filetype for defining formatter configurations on
 					-- any filetype
 					["*"] = {
@@ -88,4 +93,5 @@ return {
 			})
 		end,
   }
-	},
+}
+

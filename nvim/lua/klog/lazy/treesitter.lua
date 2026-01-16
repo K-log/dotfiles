@@ -12,7 +12,8 @@ return {
 			"query",
 			"bash",
 			"diff",
-			"luadpc",
+			"luadoc",  -- Fixed typo: was "luadpc"
+			"regex",   -- Added for better vim regex highlighting
 			"markdown",
 			"markdown_inline",
 		},
@@ -35,6 +36,15 @@ return {
 					["aa"] = "@parameter.outer",
 					["ia"] = "@parameter.inner",
 				},
+			},
+		},
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<C-space>",
+				node_incremental = "<C-space>",
+				scope_incremental = false,
+				node_decremental = "<bs>",
 			},
 		},
 	},

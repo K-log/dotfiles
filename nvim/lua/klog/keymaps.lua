@@ -14,11 +14,12 @@ vim.keymap.set("n", "<C-S-h>", vim.cmd.bprev, { desc = "Previous buffer" })
 vim.keymap.set("n", "<C-S-q>", vim.cmd.bdelete, { desc = "Close current buffer" })
 
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>gg", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_next, { desc = "Jump to next diagnostic [e]rror" })
 vim.keymap.set("n", "<leader>E", vim.diagnostic.goto_prev, { desc = "Jump to prev diagnostic [E]rror" })
 vim.keymap.set("n", "<leader>fe", vim.cmd.Ex, { desc = "[F]iles [E]xplore" })
 vim.keymap.set("n", "<leader>fn", vim.cmd.enew, { desc = "[F]ile [N]ew" })
-vim.keymap.set("n", "<leader>cp", vim.cmd.Format, { desc = "[C]ode [P]retty" })
+vim.keymap.set("n", "<leader>cp", vim.cmd.Format, { desc = "[C]ode [P]retty (format)" })
 
 -- Additional mappings for IdeaVim parity
 -- ESLint fix (formatter already sets eslint_d; provide explicit mapping)

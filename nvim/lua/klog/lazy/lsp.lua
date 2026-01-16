@@ -34,6 +34,10 @@ return {
 						runtime = { version = "LuaJIT" },
 						diagnostics = {
 							globals = { "vim" },
+							-- Enable more diagnostics for better type checking
+							neededFileStatus = {
+								["codestyle-check"] = "Any",
+							},
 						},
 						workspace = {
 							library = vim.api.nvim_get_runtime_file("", true),
@@ -41,8 +45,17 @@ return {
 						},
 						completion = {
 							callSnippet = "Replace",
+							showWord = "Disable", -- Don't show words from buffer
 						},
 						telemetry = { enable = false },
+						format = { enable = false }, -- We use stylua via formatter.nvim
+						hint = {
+							enable = true, -- Enable inline type hints
+							setType = true, -- Show type hints for variables
+							paramName = "All", -- Show parameter names in function calls
+							paramType = true, -- Show parameter types
+							arrayIndex = "Disable", -- Don't show array indices (too noisy)
+						},
 					},
 				},
 			},
@@ -73,11 +86,30 @@ return {
 			html = {},
 			cssls = {},
 			jsonls = {},
-			vimls = {},
+			vimls = {
+				settings = {
+					vim = {
+						iskeyword = "@,48-57,_,192-255,-#",
+						vimruntime = vim.env.VIMRUNTIME,
+						runtimepath = vim.o.runtimepath,
+						diagnostic = { enable = true },
+						indexes = {
+							runtimepath = true,
+							gap = 100,
+							count = 8,
+						},
+						suggest = {
+							fromRuntimepath = true,
+							fromVimruntime = true,
+						},
+					},
+				},
+			},
 		}
 
 		-- Ensure servers are installed
 		local ensure_installed = vim.tbl_keys(servers)
+		table.insert(ensure_installed, "stylua") -- Ensure stylua formatter is installed
 		require("mason-tool-installer").setup({
 			ensure_installed = ensure_installed,
 		})
@@ -153,6 +185,18 @@ return {
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 					end, { buffer = event.buf, desc = "[C]ode Inlay [H]ints" })
 				end
+
+				-- Standard LSP keymaps
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, 
+					{ buffer = event.buf, desc = "Hover Documentation" })
+				vim.keymap.set("n", "<leader>cd", vim.lsp.buf.type_definition, 
+					{ buffer = event.buf, desc = "[C]ode Type [D]efinition" })
+				vim.keymap.set("n", "<leader>cs", vim.lsp.buf.signature_help, 
+					{ buffer = event.buf, desc = "[C]ode [S]ignature help" })
+				
+				-- Signature help in insert mode while typing function parameters
+				vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, 
+					{ buffer = event.buf, desc = "Signature help" })
 			end,
 		})
 	end,
