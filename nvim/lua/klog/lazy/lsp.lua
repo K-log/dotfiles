@@ -23,7 +23,15 @@ return {
 			cmp_lsp.default_capabilities()
 		)
 
-		require("fidget").setup()
+		require("fidget").setup({
+			notification = {
+				window = {
+					avoid = {
+						"NvimTree",
+					},
+				},
+			},
+		})
 		require("mason").setup()
 
 		-- Server configurations
@@ -54,7 +62,7 @@ return {
 							setType = true, -- Show type hints for variables
 							paramName = "All", -- Show parameter names in function calls
 							paramType = true, -- Show parameter types
-							arrayIndex = "Disable", -- Don't show array indices (too noisy)
+							arrayIndex = true, -- Don't show array indices (too noisy)
 						},
 					},
 				},
@@ -187,16 +195,26 @@ return {
 				end
 
 				-- Standard LSP keymaps
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, 
-					{ buffer = event.buf, desc = "Hover Documentation" })
-				vim.keymap.set("n", "<leader>cd", vim.lsp.buf.type_definition, 
-					{ buffer = event.buf, desc = "[C]ode Type [D]efinition" })
-				vim.keymap.set("n", "<leader>cs", vim.lsp.buf.signature_help, 
-					{ buffer = event.buf, desc = "[C]ode [S]ignature help" })
-				
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = event.buf, desc = "Hover Documentation" })
+				vim.keymap.set(
+					"n",
+					"<leader>cd",
+					vim.lsp.buf.type_definition,
+					{ buffer = event.buf, desc = "[C]ode Type [D]efinition" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>cs",
+					vim.lsp.buf.signature_help,
+					{ buffer = event.buf, desc = "[C]ode [S]ignature help" }
+				)
 				-- Signature help in insert mode while typing function parameters
-				vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, 
-					{ buffer = event.buf, desc = "Signature help" })
+				vim.keymap.set(
+					"i",
+					"<C-h>",
+					vim.lsp.buf.signature_help,
+					{ buffer = event.buf, desc = "Signature help" }
+				)
 			end,
 		})
 	end,
