@@ -5,22 +5,6 @@ return {
 			local util = require("formatter.util")
 			local formatter = require("formatter")
 
-			local function eslintFormat()
-				return {
-					exe = "eslint_d",
-					args = { "--fix", "--stdin", "--stdin-filename", vim.api.nvim_buf_get_name(0) },
-					stdin = true,
-				}
-			end
-
-			local function prettierFormat()
-				return {
-					exe = "prettier",
-					args = { "--stdin-filepath", util.escape_path(util.get_current_buffer_file_path()), "--", "-" },
-					stdin = true,
-				}
-			end
-
 			formatter.setup({
 				-- Enable or disable logging
 				logging = true,
@@ -59,29 +43,24 @@ return {
 					},
 
 					javascript = {
-						eslintFormat,
-            prettierFormat,
+						require("formatter.filetypes.javascript").prettier,
+						require("formatter.filetypes.javascript").eslint,
 					},
-
 					typescript = {
-						eslintFormat,
-            prettierFormat,
+						require("formatter.filetypes.typescript").prettier,
+						require("formatter.filetypes.typescript").eslint,
 					},
-
 					javascriptreact = {
-						eslintFormat,
-            prettierFormat,
+						require("formatter.filetypes.javascriptreact").prettier,
+						require("formatter.filetypes.javascriptreact").eslint,
 					},
-
 					typescriptreact = {
-						eslintFormat,
-            prettierFormat,
+						require("formatter.filetypes.typescriptreact").prettier,
+						require("formatter.filetypes.typescriptreact").eslint,
 					},
-
-          markdown = {
-            prettierFormat,
-          },
-
+					json = {
+						require("formatter.filetypes.json").prettier,
+					},
 					-- Use the special "*" filetype for defining formatter configurations on
 					-- any filetype
 					["*"] = {
@@ -92,6 +71,5 @@ return {
 				},
 			})
 		end,
-  }
+	},
 }
-
