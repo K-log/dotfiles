@@ -195,7 +195,7 @@ return {
 				end
 
 				-- Standard LSP keymaps
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = event.buf, desc = "Hover Documentation" })
+				vim.keymap.set("n", "<leader>ck", vim.lsp.buf.hover, { buffer = event.buf, desc = "Hover Documentation" })
 				vim.keymap.set(
 					"n",
 					"<leader>cd",
