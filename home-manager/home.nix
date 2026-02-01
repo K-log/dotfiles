@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 
@@ -48,6 +48,9 @@
     pkgs.zsh
     pkgs.rustup
     pkgs.rustc
+    # pkgs.neovim
+    pkgs.zsh
+    pkgs.cargo
     pkgs.go
     pkgs.python311
     pkgs.python311Packages.pip
