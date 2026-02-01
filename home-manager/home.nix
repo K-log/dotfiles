@@ -45,9 +45,9 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     pkgs.git
-    # pkgs.neovim
     pkgs.zsh
-    pkgs.cargo
+    pkgs.rustup
+    pkgs.rustc
     pkgs.go
     pkgs.python311
     pkgs.python311Packages.pip
@@ -63,6 +63,12 @@
     pkgs.wget
     pkgs.jq
     pkgs.unzip
+    pkgs.opencode
+    pkgs.ghostty
+
+    # deps
+    pkgs.pkg-config
+    # pkgs.wayland-client
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
