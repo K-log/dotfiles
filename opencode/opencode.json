@@ -4,5 +4,12 @@
   "plugin": [
     "open-trees",
     "@franlol/opencode-md-table-formatter@0.0.3",
-  ]
+  ],
+  "mcp": {
+    "figma": {
+      "type": "remote",
+      "url": "http://127.0.0.1:3845/mcp",
+      "enabled": true
+    }
+  }
 }
