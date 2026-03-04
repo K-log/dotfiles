@@ -52,6 +52,9 @@ return {
 	{ -- Collection of various small independent plugins/modules
 		"nvim-mini/mini.nvim",
 		config = function()
+			require("mini.indentscope").setup()
+
+
 			-- Better Around/Inside textobjects
 			--
 			-- Examples:
@@ -93,10 +96,10 @@ return {
 		---@type render.md.UserConfig
 		opts = {},
 	},
-	{
-		"supermaven-inc/supermaven-nvim",
-		config = function()
-			require("supermaven-nvim").setup({})
-		end,
-	},
+	-- {
+	-- 	"supermaven-inc/supermaven-nvim",
+	-- 	config = function()
+	-- 		require("supermaven-nvim").setup({})
+	-- 	end,
+	-- },
 }
