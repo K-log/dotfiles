@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   programs.neovim = {
@@ -42,8 +42,8 @@
 
       # For Mason to work properly
       nodejs
-      cargo
-      go
+      # cargo
+      # go
       python311
       python311Packages.python
       

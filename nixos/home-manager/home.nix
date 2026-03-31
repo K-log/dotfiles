@@ -29,12 +29,8 @@
   # environment.
   home.packages = with pkgs; [
     git
-    zsh
     rustup
     rustc
-    neovim
-    zsh
-    cargo
     go
     python311
     python311Packages.pip
@@ -55,6 +51,11 @@
     gh
     jetbrains-toolbox
     godot_4_6
+
+    # zsh
+    zsh
+    oh-my-zsh
+    nix-zsh-completions
 
     # deps
     pkg-config
@@ -101,7 +102,7 @@
 
   programs.zsh = {
     enable = true;
-    autosuggestions.enable = true;
+    enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
 
     shellAliases = {
@@ -110,13 +111,10 @@
       nix-check = "nixos-rebuild dry-activate --flake /etc/nixos#${hostname}";
     };
 
-    ohMyZsh = {
+    oh-my-zsh = {
       enable = true;
       theme = "agnoster";
       plugins = [ "git" "z" "fzf" "nvm" "urltools" ];
-      customPkgs = [
-        pkgs.nix-zsh-completions
-      ];
     };
   };
 
@@ -127,6 +125,6 @@
     };
   };
 
-  # Let Home Manager install and manage itself.
+# Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
