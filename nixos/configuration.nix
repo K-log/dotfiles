@@ -15,6 +15,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # keep battery at 80% charge
+  boot.kernelParams = [ "thinkpad_acpi.battery_charge_control_threshold=80" ];
+
   networking.hostName = hostname; 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -56,6 +59,17 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  # services.tlp = {
+  #   enable = true;
+  #   settings = {
+  #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
+  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+  #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+  #     PLATFORM_PROFILE_ON_BAT = "low-power";
+  #   };
+  # };
+  powerManagement.powertop.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -119,6 +133,7 @@
     curl
     git
     trash-cli
+    powertop
   ];
 
   programs.firefox.enable = true;
