@@ -2,27 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
-let
-  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
-in 
+{ pkgs, user, hostname, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./nix-ld-config.nix
+  ];
 
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "chronos"; # Define your hostname.
+  networking.hostName = hostname; 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -54,15 +47,15 @@ in
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
+
+  # Enable the KDE Plasma Desktop Environment.
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -86,19 +79,19 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.noah = {
+  users.users.${user} = {
     isNormalUser = true;
     description = "Noah Burwell";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      home-manager	
-      kdePackages.kate
-    ];
   };
 
+
+  users.defaultUserShell = pkgs.zsh;
+
+  # prevent new user setup dialog
+  #system.userActivationScripts.zshrc = "touch .zshrc";
 
   fonts = {
     packages = [ 
@@ -115,19 +108,6 @@ in
 
   console.font = "JetBrainsMono";
 
-  # home-manager.backupFileExtension = ".bak";
-  # home-manager.users.noah = {
-  #   programs.bash.enable = true;
-  #   programs.zsh.enable = true;
-  #
-  #   home.stateVersion = "25.11";
-  # };
-
-
-  users.defaultUserShell = pkgs.zsh;
-  # prevent new user setup dialog
-  system.userActivationScripts.zshrc = "touch .zshrc";
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -140,30 +120,11 @@ in
     curl
     git
     trash-cli
-    gh
-    jetbrains-toolbox
-    godot
-    oh-my-zsh
-    zsh-autosuggestions
-    zsh-syntax-highlighting
   ];
 
   programs.firefox.enable = true;
 
-  programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-    ohMyZsh = {
-      enable = true;
-      theme = "agnoster";
-      plugins = [ "git" "z" "fzf" "nvm" "urltools" ];
-      customPkgs = [
-        pkgs.nix-zsh-completions
-      ];
-    };
-  };
-
+  packages.zsh.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
