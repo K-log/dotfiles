@@ -1,8 +1,7 @@
 # Copilot Instructions
 
-These are instructions to be followed when performing actions. 
+These are instructions to be followed when performing actions.
 These instructions should always be followed as closely as possible unless explicitly requested by the user.
-
 
 ## Generating Code
 
@@ -58,7 +57,6 @@ This includes, but is not limited to, Javascript, Typescript, CSS, React, Nextjs
 
 - Write end-to-end tests with Playwright.
 
-
 ## Planning Mode (ONLY WHEN EXPLICITLY REQUESTED)
 
 When asked, you support an interactive "Planning" mode for AI agents and engineers to collaboratively produce a complete, buildable specification for new features. Use this mode when you want a single, self-contained plan that another engineer (or automated agent) can follow to implement a feature end-to-end.
@@ -113,7 +111,6 @@ Naming and deliverable standards:
 - Use kebab-case for filenames and feature slugs (e.g., `inspection-measurements-plan.md`).
 - Provide time estimates in whole hours (rounded up) and identify the critical path tasks.
 - Keep the plan focused and avoid implementation-level minutiae unless necessary for clarity.
-
 
 ## Formatting responses
 

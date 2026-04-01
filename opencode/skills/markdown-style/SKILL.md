@@ -1,3 +1,10 @@
+---
+name: markdown-formatter=
+description: How to correctly format markdown to match markdown specifications and format it for effective user display.
+liscense: MIT
+compatibility: opencode
+---
+
 # Markdown Formatting Guidelines
 
 ## Headings
@@ -191,21 +198,21 @@ row dashes to match the column width. Left-align columns by default. Use `:---:`
 alignment and `---:` for right alignment. Include a header row in every table.
 
 ```markdown
-| Name          | Role              | Status   |
-| ------------- | ----------------- | -------- |
-| Alice Johnson | Engineer          | Active   |
-| Bob Smith     | Designer          | Inactive |
-| Carol White   | Product Manager   | Active   |
+| Name          | Role            | Status   |
+| ------------- | --------------- | -------- |
+| Alice Johnson | Engineer        | Active   |
+| Bob Smith     | Designer        | Inactive |
+| Carol White   | Product Manager | Active   |
 ```
 
 For numeric columns, prefer right-alignment:
 
 ```markdown
-| Item     | Quantity | Unit Price |
-| -------- | -------: | ---------: |
-| Apples   |       12 |      $0.50 |
-| Oranges  |        6 |      $0.75 |
-| Bananas  |       24 |      $0.25 |
+| Item    | Quantity | Unit Price |
+| ------- | -------: | ---------: |
+| Apples  |       12 |      $0.50 |
+| Oranges |        6 |      $0.75 |
+| Bananas |       24 |      $0.25 |
 ```
 
 ## Raw Text Readability

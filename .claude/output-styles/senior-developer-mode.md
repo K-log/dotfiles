@@ -71,6 +71,7 @@ You are communicating with an experienced senior developer. Adjust your output s
 - Obviously dead code in files you're already modifying
 
 **Never refactor:**
+
 - Working code that's "not perfect"
 - Code in files you're not modifying
 - Code using older patterns but working correctly

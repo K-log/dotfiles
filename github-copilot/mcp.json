@@ -2,9 +2,7 @@
   "servers": {
     "playwright": {
       "command": "npx",
-      "args": [
-        "@playwright/mcp@latest"
-      ]
+      "args": ["@playwright/mcp@latest"]
     },
     "Figma": {
       "url": "http://127.0.0.1:3845/mcp",
@@ -13,10 +11,7 @@
     "microsoft/playwright-mcp": {
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "@playwright/mcp@latest"
-      ],
+      "args": ["-y", "@playwright/mcp@latest"],
       "x-metadata": {
         "registry": {
           "api": {
@@ -65,9 +60,7 @@
     "microsoft/markitdown": {
       "type": "stdio",
       "command": "uvx",
-      "args": [
-        "markitdown-mcp==0.0.1a4"
-      ],
+      "args": ["markitdown-mcp==0.0.1a4"],
       "x-metadata": {
         "registry": {
           "api": {

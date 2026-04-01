@@ -31,12 +31,14 @@
 ## Refactoring
 
 Only refactor proactively when:
+
 - The same logic appears 3+ times in related files.
 - Type safety gaps exist in files you are already modifying.
 - There is an obvious performance bottleneck.
 - There is clearly dead code in files you are already modifying.
 
 Never refactor:
+
 - Working code in files you are not modifying.
 - Code using older patterns that works correctly.
 - Code that could be "more elegant" but is readable.
