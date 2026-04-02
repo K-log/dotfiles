@@ -18,7 +18,7 @@
   # keep battery at 80% charge
   boot.kernelParams = [ "thinkpad_acpi.battery_charge_control_threshold=80" ];
 
-  networking.hostName = hostname; 
+  networking.hostName = hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -56,8 +56,14 @@
     variant = "";
   };
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
+  services.displayManager = {
+    defaultSession = "hyprland";
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+  };
+# Enable the KDE Plasma Desktop Environment.
   services.desktopManager.plasma6.enable = true;
 
   # services.tlp = {
@@ -108,7 +114,7 @@
   #system.userActivationScripts.zshrc = "touch .zshrc";
 
   fonts = {
-    packages = [ 
+    packages = [
       pkgs.nerd-fonts.jetbrains-mono
     ];
     fontconfig = {
@@ -134,6 +140,13 @@
     git
     trash-cli
     powertop
+
+    rofi
+    nwg-look
+    pavucontrol
+    nerd-fonts.jetbrains-mono
+    swww
+    grim
   ];
 
   programs.firefox.enable = true;
@@ -148,6 +161,14 @@
      enableSSHSupport = true;
   };
 
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # Hint Electron apps to use Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # List services that you want to enable:
   services.fprintd = {
