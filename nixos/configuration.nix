@@ -144,9 +144,13 @@
     rofi
     nwg-look
     pavucontrol
-    nerd-fonts.jetbrains-mono
     swww
     grim
+    networkmanagerapplet
+    blueman
+    brightnessctl
+    libnotify
+    waybar
   ];
 
   programs.firefox.enable = true;

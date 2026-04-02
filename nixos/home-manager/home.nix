@@ -1,20 +1,11 @@
 { pkgs, user, hostname, ... }:
-let
-  keybinds-menu = pkgs.writeShellScriptBin "keybinds-menu" ''
-    # This script:
-    # 1. Searches your hyprland config for lines starting with 'bind ='
-    # 2. Cleans up the text for better readability
-    # 3. Pipes it into rofi (dmenu mode) for a searchable popup
-    grep -E '^bind =' ~/.config/hypr/hyprland.conf | \
-    sed 's/bind = //g' | \
-    sed 's/exec, //g' | \
-    rofi -dmenu -i -p "󱕰 Keybindings" -config ~/.config/rofi/config.rasi
-  '';
-in
+
 {
 
   imports = [
     ./programs/neovim.nix
+    ./programs/hyprland.nix
+    ./programs/waybar.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -144,13 +135,15 @@ in
       "$terminal" = "ghostty";
       "$mainMod" = "SUPER";
 
-      monitor = ",preferred,auto,1"; # Setup for Framework screen
+      monitor = ",preferred,auto,1.5"; # Setup for Framework screen
 
       exec-once = [
         "hyprpm reload -n"
         "waybar"
         "swww init"
-        "mako"
+        "waybar"                 # Starts your top bar
+        "nm-applet --indicator"  # Starts the Wi-Fi icon
+        "blueman-applet"         # Starts the Bluetooth icon
       ];
 
       input = {
@@ -170,8 +163,8 @@ in
         "$mainMod SHIFT, K, exec, keybinds-menu"
 
         # SETTINGS PANEL SHORTCUTS
-        "$mainMod, S, exec, nwg-look"            # Appearance Settings
-        "$mainMod SHIFT, S, exec, pavucontrol"   # Audio Settings
+        "$mainMod, S, exec, nwg-look"             # Appearance Settings
+        "$mainMod SHIFT, S, exec, pavucontrol"    # Audio Settings
         "$mainMod, W, exec, nm-connection-editor" # Network Settings
 
         # Application Launcher
@@ -195,10 +188,10 @@ in
     enable = true;
     settings = {
       theme = "Atom One Dark";
-      font-size = 12;
+      font-size = 14;
       window-decoration = false;
       font-family = "JetBrainsMono Nerd Font";
-      background-opacity = 0.9;
+      background-opacity = 0.95;
       cursor-style = "block";
       shell-integration-features = "true";
     };
