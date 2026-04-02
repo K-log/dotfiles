@@ -1,7 +1,6 @@
 { pkgs, user, hostname, ... }:
 
 {
-
   imports = [
     ./programs/neovim.nix
     ./programs/hyprland.nix
@@ -30,7 +29,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    keybinds-menu
     git
     rustup
     rustc
@@ -125,62 +123,6 @@
     enable = true;
     settings = {
       git_protocol = "ssh";
-    };
-  };
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-    settings = {
-      # VARIABLES
-      "$terminal" = "ghostty";
-      "$mainMod" = "SUPER";
-
-      monitor = ",preferred,auto,1.5"; # Setup for Framework screen
-
-      exec-once = [
-        "hyprpm reload -n"
-        "waybar"
-        "swww init"
-        "waybar"                 # Starts your top bar
-        "nm-applet --indicator"  # Starts the Wi-Fi icon
-        "blueman-applet"         # Starts the Bluetooth icon
-      ];
-
-      input = {
-        kb_layout = "us";
-        follow_mouse = 1;
-        touchpad = {
-          natural_scroll = true; # Feels better on Framework
-          tap-to-click = true;
-        };
-      };
-      bind = [
-        # Terminal & Browser
-        "$mainMod, Q, exec, $terminal"
-        "$mainMod, B, exec, firefox"
-
-        # KEYBINDINGS HELPER
-        "$mainMod SHIFT, K, exec, keybinds-menu"
-
-        # SETTINGS PANEL SHORTCUTS
-        "$mainMod, S, exec, nwg-look"             # Appearance Settings
-        "$mainMod SHIFT, S, exec, pavucontrol"    # Audio Settings
-        "$mainMod, W, exec, nm-connection-editor" # Network Settings
-
-        # Application Launcher
-        "$mainMod, R, exec, rofi -show drun"
-
-        # Window management
-        "$mainMod, C, killactive,"
-        "$mainMod, V, togglefloating,"
-        "$mainMod, F, fullscreen,"
-
-        # Focus movement
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
-      ];
     };
   };
 

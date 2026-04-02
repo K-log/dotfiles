@@ -2,13 +2,24 @@
 
 let
   keybinds-menu = pkgs.writeShellScriptBin "keybinds-menu" ''
-    CONF=$HOME/.config/hypr/hyprland.conf
-    if [ ! -f "$CONF" ]; then
-        CONF=$(readlink -f $HOME/.config/hypr/hyprland.conf)
+    # 1. Resolve the actual path of the config (following Nix symlinks)
+    CONF_PATH=$(readlink -f "$HOME/.config/hypr/hyprland.conf")
+
+    # 2. Check if the file exists
+    if [ ! -f "$CONF_PATH" ]; then
+        notify-send "Error" "Hyprland config not found at $CONF_PATH"
+        exit 1
     fi
-    grep -E '^bind =' "$CONF" | \
-    sed 's/bind = //g; s/\$mainMod/SUPER/g; s/exec, //g' | \
-    rofi -dmenu -i -p "󱕰 Keybinds"
+
+    # 3. Parse the file
+    # We use 'grep' to find binds, 'sed' to clean up the formatting,
+    # and 'rofi' to display it.
+    grep -E '^bind[e]? =' "$CONF_PATH" | \
+    sed 's/bind[e]* = //g' | \
+    sed 's/\$mainMod/SUPER/g' | \
+    sed 's/exec, //g' | \
+    rofi -dmenu -i -p "󱕰 Keybinds" \
+    -theme-str 'window { width: 50%; } listview { lines: 15; }'
   '';
 in
 {
@@ -22,15 +33,14 @@ in
       "$terminal" = "ghostty";
       "$mainMod" = "SUPER";
 
-      monitor = ",preferred,auto,1.5"; # Setup for Framework screen
+      monitor = ",preferred,auto,1.567"; # Setup for Framework screen
 
       exec-once = [
         "hyprpm reload -n"
         "waybar"
         "swww init"
-        "waybar"                 # Starts your top bar
-        "nm-applet --indicator"  # Starts the Wi-Fi icon
-        "blueman-applet"         # Starts the Bluetooth icon
+        "nm-applet --indicator"
+        "blueman-applet"
       ];
 
       input = {
@@ -50,16 +60,16 @@ in
         "$mainMod SHIFT, K, exec, keybinds-menu"
 
         # SETTINGS PANEL SHORTCUTS
-        "$mainMod, S, exec, nwg-look"             # Appearance Settings
+        "$mainMod SHIFT, T, exec, nwg-look"             # Appearance Settings
         "$mainMod SHIFT, S, exec, pavucontrol"    # Audio Settings
-        "$mainMod, W, exec, nm-connection-editor" # Network Settings
+        "$mainMod SHIFT, I, exec, nm-connection-editor" # Network Settings
         "$mainMod SHIFT ALT, M, exit,"
 
         # Application Launcher
         "$mainMod, R, exec, rofi -show drun"
 
         # Window management
-        "$mainMod, C, killactive,"
+        "$mainMod, W, killactive,"
         "$mainMod, V, togglefloating,"
         "$mainMod, F, fullscreen,"
 
