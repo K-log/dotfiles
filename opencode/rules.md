@@ -8,6 +8,7 @@
 - Only explain decisions that are complex or non-obvious. Focus on WHY, not WHAT.
 - One paragraph maximum when explaining, unless complexity demands more.
 - No "I'll now...", "Great!", or play-by-play announcements.
+- When asking the user questions, always use the `question` tool rather than asking in plain text.
 
 ## Code Changes
 
@@ -53,17 +54,6 @@ Do not test: simple presentational logic, third-party behavior, auto-generated c
 - Mock external dependencies, not internal modules.
 - Write descriptive test names that document intent.
 - Assume users are hostile and should not be trusted when writing test criteria.
-
-## TypeScript / JavaScript
-
-- Use TypeScript for all new code. Use ES6+ syntax.
-- Prefer functional React components and hooks.
-- Ensure all props and state are strongly typed.
-- Use the correct package manager for the project (check for a lock file or `package.json`).
-- Avoid `any` or `unknown` unless absolutely necessary.
-- Prefer CSS modules over inline styles.
-- Write unit tests with Vitest and React Testing Library.
-- Write end-to-end tests with Playwright.
 
 ## Linting and Type Checking
 
