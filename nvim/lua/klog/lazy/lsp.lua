@@ -26,12 +26,11 @@ return {
 		require("fidget").setup({
 			notification = {
 				window = {
-					avoid = {
-						"NvimTree",
-					},
+					avoid = { "NvimTree" },
 				},
 			},
 		})
+
 		require("mason").setup()
 
 		-- Server configurations
@@ -42,10 +41,7 @@ return {
 						runtime = { version = "LuaJIT" },
 						diagnostics = {
 							globals = { "vim" },
-							-- Enable more diagnostics for better type checking
-							neededFileStatus = {
-								["codestyle-check"] = "Any",
-							},
+							neededFileStatus = { ["codestyle-check"] = "Any" },
 						},
 						workspace = {
 							library = vim.api.nvim_get_runtime_file("", true),
@@ -53,16 +49,16 @@ return {
 						},
 						completion = {
 							callSnippet = "Replace",
-							showWord = "Disable", -- Don't show words from buffer
+							showWord = "Disable",
 						},
 						telemetry = { enable = false },
-						format = { enable = false }, -- We use stylua via formatter.nvim
+						format = { enable = false },
 						hint = {
-							enable = true, -- Enable inline type hints
-							setType = true, -- Show type hints for variables
-							paramName = "All", -- Show parameter names in function calls
-							paramType = true, -- Show parameter types
-							arrayIndex = true, -- Don't show array indices (too noisy)
+							enable = true,
+							setType = true,
+							paramName = "All",
+							paramType = true,
+							arrayIndex = true,
 						},
 					},
 				},
@@ -79,56 +75,33 @@ return {
 							includeInlayFunctionLikeReturnTypeHints = true,
 						},
 					},
-					javascript = {
-						inlayHints = {
-							includeInlayParameterNameHints = "all",
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-						},
-					},
 				},
 			},
-
 			html = {},
 			cssls = {},
 			jsonls = {},
-			vimls = {
-				settings = {
-					vim = {
-						iskeyword = "@,48-57,_,192-255,-#",
-						vimruntime = vim.env.VIMRUNTIME,
-						runtimepath = vim.o.runtimepath,
-						diagnostic = { enable = true },
-						indexes = {
-							runtimepath = true,
-							gap = 100,
-							count = 8,
-						},
-						suggest = {
-							fromRuntimepath = true,
-							fromVimruntime = true,
-						},
-					},
-				},
-			},
 		}
 
 		-- Ensure servers are installed
 		local ensure_installed = vim.tbl_keys(servers)
-		table.insert(ensure_installed, "stylua") -- Ensure stylua formatter is installed
+		table.insert(ensure_installed, "stylua")
 		require("mason-tool-installer").setup({
 			ensure_installed = ensure_installed,
 		})
 
-		-- Setup LSP servers
+		-- Setup LSP servers using Neovim 0.12 native API
 		require("mason-lspconfig").setup({
 			handlers = {
 				function(server_name)
-					local server = servers[server_name] or {}
-					server.capabilities = vim.tbl_deep_extend("force", {}, lsp_capabilities, server.capabilities or {})
-					vim.lsp.config(server_name, server)
+					local server_opts = servers[server_name] or {}
+					server_opts.capabilities =
+						vim.tbl_deep_extend("force", {}, lsp_capabilities, server_opts.capabilities or {})
+
+					-- 1. Use the new native config registration
+					vim.lsp.config(server_name, server_opts)
+
+					-- 2. Explicitly enable the server for the current session
+					vim.lsp.enable(server_name)
 				end,
 			},
 		})
@@ -147,33 +120,22 @@ return {
 				["<C-Space>"] = cmp.mapping.complete(),
 			}),
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-				{ name = "supermaven" },
+				{ name = "nvim_lsp", priority = 1000 },
+				{ name = "luasnip", priority = 750 },
 			}, {
 				{ name = "buffer" },
 			}),
 		})
 
-		-- Diagnostics configuration
-		vim.diagnostic.config({
-			float = {
-				focusable = false,
-				style = "minimal",
-				border = "rounded",
-				source = "if_many",
-				header = "",
-				prefix = "",
-			},
-		})
-
-		-- LSP attach autocmd
+		-- Standardized 0.12 LSP Attach
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 			callback = function(event)
-				-- Document highlight
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
-				if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+				local methods = vim.lsp.protocol.Methods -- Using 0.12 Methods table
+
+				-- Document highlight
+				if client and client.supports_method(methods.textDocument_documentHighlight) then
 					local highlight_group = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						buffer = event.buf,
@@ -187,34 +149,18 @@ return {
 					})
 				end
 
-				-- Inlay hints toggle
-				if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+				-- Inlay hints toggle using 0.12 syntax
+				if client and client.supports_method(methods.textDocument_inlayHint) then
 					vim.keymap.set("n", "<leader>ch", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-					end, { buffer = event.buf, desc = "[C]ode Inlay [H]ints" })
+					end, { buffer = event.buf, desc = "Toggle Inlay Hints" })
 				end
 
-				-- Standard LSP keymaps
-				vim.keymap.set("n", "<leader>ck", vim.lsp.buf.hover, { buffer = event.buf, desc = "Hover Documentation" })
-				vim.keymap.set(
-					"n",
-					"<leader>cd",
-					vim.lsp.buf.type_definition,
-					{ buffer = event.buf, desc = "[C]ode Type [D]efinition" }
-				)
-				vim.keymap.set(
-					"n",
-					"<leader>cs",
-					vim.lsp.buf.signature_help,
-					{ buffer = event.buf, desc = "[C]ode [S]ignature help" }
-				)
-				-- Signature help in insert mode while typing function parameters
-				vim.keymap.set(
-					"i",
-					"<C-h>",
-					vim.lsp.buf.signature_help,
-					{ buffer = event.buf, desc = "Signature help" }
-				)
+				-- Keymaps
+				local opts = { buffer = event.buf }
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 			end,
 		})
 	end,

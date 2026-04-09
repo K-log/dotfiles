@@ -36,7 +36,6 @@ vim.keymap.set("n", "<leader>ci", function()
 	vim.lsp.buf.execute_command(params)
 end, { desc = "[C]ode optimize [I]mports" })
 
--- Code actions & rename
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ctions" })
 vim.keymap.set("n", "<leader>cre", vim.lsp.buf.rename, { desc = "[C]ode [R]ename [E]lement" })
 
