@@ -1,5 +1,5 @@
 import { tool } from "@opencode-ai/plugin"
-import { existsSync } from "fs"
+import { existsSync, mkdirSync, writeFileSync } from "fs"
 import path from "path"
 
 const LOCKFILE_COMMANDS: Record<string, string[]> = {
@@ -10,9 +10,18 @@ const LOCKFILE_COMMANDS: Record<string, string[]> = {
   "package-lock.json": ["npm", "install"],
 }
 
-const DESCRIPTION_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/
-// Matches "PROJ-123-my-description" and splits into ticket ID + description
-const BRANCH_PATTERN = /^([A-Za-z][A-Za-z0-9]*-\d+)-(.+)$/
+// Matches "PROJ-123-my-description" and splits into ticket ID + description.
+// The description segment accepts any non-empty sequence; sanitizeBranchSegment
+// normalizes it to lowercase alphanumeric and hyphens.
+const BRANCH_PATTERN = /^([A-Za-z][A-Za-z0-9]*-\d+)-([^]+)$/
+
+function sanitizeBranchSegment(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, "-") // replace illegal chars with dash
+    .replace(/-+/g, "-")          // collapse consecutive dashes
+    .replace(/^-+|-+$/g, "")      // trim leading/trailing dashes
+}
 
 function parseBranchInput(input: string): {
   ticketId: string
@@ -20,7 +29,10 @@ function parseBranchInput(input: string): {
 } | null {
   const match = BRANCH_PATTERN.exec(input)
   if (!match) return null
-  return { ticketId: match[1], description: match[2] }
+  return {
+    ticketId: sanitizeBranchSegment(match[1]),
+    description: sanitizeBranchSegment(match[2]),
+  }
 }
 
 async function detectDefaultBranch(cwd: string): Promise<string> {
@@ -177,15 +189,15 @@ If runInstall is false and a lockfile was found:
 
     const { ticketId, description } = parsed
 
-    if (!DESCRIPTION_PATTERN.test(description)) {
+    if (!description) {
       return JSON.stringify({
         status: "error",
-        message: `Invalid description format: "${description}". Must be kebab-case (e.g. add-login-page).`,
+        message: `Branch description segment is empty after sanitization. Input was: "${branch}". Provide a meaningful description after the ticket ID, e.g. "PROJ-123-add-login-page".`,
       })
     }
 
-    const worktreePath = path.join(repoRoot, ".worktrees", ticketId)
     const branchName = `${ticketId}_${description}`
+    const worktreePath = path.join(repoRoot, ".worktrees", branchName)
 
     if (action === "check") {
       const [branches, worktrees] = await Promise.all([
@@ -207,6 +219,15 @@ If runInstall is false and a lockfile was found:
     if (action === "check" || action === "create") {
       const base = baseBranch || (await detectDefaultBranch(repoRoot))
 
+      let baseCommit: string
+      try {
+        baseCommit = (
+          await Bun.$`git rev-parse ${base}`.cwd(repoRoot).text()
+        ).trim()
+      } catch {
+        baseCommit = "unknown"
+      }
+
       try {
         await Bun.$`git worktree add -b ${branchName} ${worktreePath} ${base}`
           .cwd(repoRoot)
@@ -219,6 +240,13 @@ If runInstall is false and a lockfile was found:
         })
       }
 
+      const worktreesDir = path.join(repoRoot, ".worktrees")
+      const gitignorePath = path.join(worktreesDir, ".gitignore")
+      if (!existsSync(gitignorePath)) {
+        mkdirSync(worktreesDir, { recursive: true })
+        writeFileSync(gitignorePath, "*\n")
+      }
+
       const lockfile = detectLockfile(worktreePath)
       const installResult =
         lockfile && runInstall
@@ -229,8 +257,8 @@ If runInstall is false and a lockfile was found:
         status: "created",
         branch: branchName,
         baseBranch: base,
+        baseCommit,
         worktreePath,
-        worktreeRelativePath: path.join(".worktrees", ticketId),
         lockfile: lockfile
           ? { file: lockfile.file, command: lockfile.command.join(" ") }
           : null,
@@ -264,11 +292,24 @@ If runInstall is false and a lockfile was found:
           ? await runInstallCommand(lockfile, target.path)
           : null
 
+      const detectedBase = await detectDefaultBranch(repoRoot)
+      let baseCommit: string
+      try {
+        baseCommit = (
+          await Bun.$`git merge-base ${target.branch} ${detectedBase}`
+            .cwd(repoRoot)
+            .text()
+        ).trim()
+      } catch {
+        baseCommit = "unknown"
+      }
+
       return JSON.stringify({
         status: "reused",
         branch: target.branch,
+        baseBranch: detectedBase,
+        baseCommit,
         worktreePath: target.path,
-        worktreeRelativePath: path.join(".worktrees", ticketId),
         lockfile: lockfile
           ? { file: lockfile.file, command: lockfile.command.join(" ") }
           : null,

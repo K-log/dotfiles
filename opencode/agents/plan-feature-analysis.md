@@ -30,7 +30,7 @@ You receive:
 
 - A feature description or task summary
 - The project root path (or worktree path)
-- Optionally, research findings from the planner-researcher agent
+- Optionally, research findings from the plan-feature-research agent
 
 ### Workflow
 

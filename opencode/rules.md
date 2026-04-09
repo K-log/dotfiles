@@ -67,6 +67,13 @@ Do not test: simple presentational logic, third-party behavior, auto-generated c
 - Keep messages simple and easy to read.
 - Do not prefix messages with `feat:`, `fix:`, `refactor:`, or similar conventional commit tags unless the project already uses them.
 
+## Git branches
+
+- If there is a ticket, format branches as `<ticket-id>-<short-description-no-spaces-or-capitals>`.
+- If there is no ticket, then just `<short-description-no-spaces-or-capitals>`.
+- If there is branch with the name already, use the `questions` and provide some alternatives to choose from.
+- Avoid characters in branch names other than `[a-z]`, `[A-Z]`, `[0-9]`, `[-]`.
+
 ## Code Review
 
 After completing non-trivial code changes, invoke the `code-reviewer` subagent to review the work.

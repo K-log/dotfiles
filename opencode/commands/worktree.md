@@ -23,5 +23,3 @@ is null:
 - If the current plan already mentions installing packages or dependencies, call the
   tool again with `runInstall: true`.
 - Otherwise, ask the user if they want to run the detected install command.
-
-If `.worktrees/` is not in the project's `.gitignore`, suggest adding it.

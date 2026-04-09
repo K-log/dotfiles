@@ -19,6 +19,7 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.inccommand = 'split' -- preview substitution live on type
 vim.opt.scrolloff = 10
 vim.opt.linebreak = true
+vim.opt.wrap = false
 
 
 -- Searching
