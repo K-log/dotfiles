@@ -5,6 +5,7 @@ description: >-
   run any commands.
 mode: all
 temperature: 0.2
+color: info
 permission:
   edit: deny
   bash:

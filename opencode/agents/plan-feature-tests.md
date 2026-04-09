@@ -4,6 +4,8 @@ description: >-
   agents, then produces a manual testing checklist and an automated test plan
   for a given feature.   Invoked by the plan-feature agent after the
   implementation plan is synthesized.
+mode: subagent
+temperature: 0.1
 permission:
   edit:
     "*": deny

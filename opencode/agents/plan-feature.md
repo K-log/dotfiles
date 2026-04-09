@@ -6,6 +6,7 @@ description: >-
   execute the plan.
 mode: primary
 temperature: 0.1
+color: primary
 permission:
   edit:
     "*": deny
