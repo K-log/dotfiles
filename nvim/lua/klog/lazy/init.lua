@@ -54,7 +54,6 @@ return {
 		config = function()
 			require("mini.indentscope").setup()
 
-
 			-- Better Around/Inside textobjects
 			--
 			-- Examples:
@@ -89,17 +88,24 @@ return {
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
 	},
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" },
-		---@module 'render-markdown'
-		---@type render.md.UserConfig
-		opts = {},
-	},
+	--{
+	--	"MeanderingProgrammer/render-markdown.nvim",
+	--	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" },
+	--	---@module 'render-markdown'
+	--	---@type render.md.UserConfig
+	--	opts = {},
+	--},
 	-- {
 	-- 	"supermaven-inc/supermaven-nvim",
 	-- 	config = function()
 	-- 		require("supermaven-nvim").setup({})
 	-- 	end,
 	-- },
+	--{
+	--	"MeanderingProgrammer/render-markdown.nvim",
+	--	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" },
+	--	---@module 'render-markdown'
+	--	---@type render.md.UserConfig
+	--	opts = {},
+	--},
 }

@@ -134,8 +134,10 @@ return {
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				local methods = vim.lsp.protocol.Methods -- Using 0.12 Methods table
 
+        if not client then return end
+
 				-- Document highlight
-				if client and client.supports_method(methods.textDocument_documentHighlight) then
+				if client:supports_method(methods.textDocument_documentHighlight) then
 					local highlight_group = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						buffer = event.buf,
@@ -150,7 +152,7 @@ return {
 				end
 
 				-- Inlay hints toggle using 0.12 syntax
-				if client and client.supports_method(methods.textDocument_inlayHint) then
+				if client:supports_method(methods.textDocument_inlayHint) then
 					vim.keymap.set("n", "<leader>ch", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 					end, { buffer = event.buf, desc = "Toggle Inlay Hints" })

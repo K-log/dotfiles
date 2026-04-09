@@ -8,16 +8,7 @@ mode: subagent
 temperature: 0.1
 permission:
   edit: deny
-  bash:
-    "*": deny
-    "cat *": allow
-    "ls *": allow
-    "find *": allow
-    "grep *": allow
-    "head *": allow
-    "tail *": allow
-    "wc *": allow
-    "jq *": allow
+  bash: deny
   task:
     "*": deny
     "ask": allow

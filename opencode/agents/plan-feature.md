@@ -11,16 +11,7 @@ permission:
   edit:
     "*": deny
     "~/.opencode-plans/*.md": allow
-  bash:
-    "*": ask
-    "cat *": allow
-    "ls *": allow
-    "find *": allow
-    "grep *": allow
-    "head *": allow
-    "tail *": allow
-    "wc *": allow
-    "jq *": allow
+  bash: deny
   task:
     "*": deny
     "plan-feature-research": allow
@@ -105,6 +96,7 @@ patterns to follow, and anti-patterns to avoid.>
 1. <Specific, actionable step with file paths>
 2. <Next step>
    ...
+```
 
 ## Post-Implementation
 
@@ -132,7 +124,6 @@ project's detected test tooling.>
 <If the project defines custom agents for writing tests, list them here
 with a brief description and note which test cases they should be used
 for. If none were found, state "None detected.">
-```
 
 #### Phase 5: Test Planning
 

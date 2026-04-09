@@ -13,10 +13,20 @@
   },
   "permission": {
     "bash": {
-      "*": "ask",
-      "git commit*": "ask",
-      "git push*": "ask",
-      "rm *": "ask"
+      "*": "deny",
+      "git *": "ask",
+      "git commit *": "deny",
+    }
+  },
+  "agent": {
+    "build": {
+      "permission": {
+        "bash": {
+          "*": "deny",
+          "git *": "ask",
+          "git commit *": "deny",
+        }
+      }
     }
   },
   "formatter": {

@@ -8,14 +8,7 @@ temperature: 0.2
 color: info
 permission:
   edit: deny
-  bash:
-    "*": deny
-    "cat *": allow
-    "ls *": allow
-    "find *": allow
-    "grep *": allow
-    "head *": allow
-    "tail *": allow
+  bash: deny
 ---
 
 You are a research agent. Your sole purpose is to answer questions accurately with verifiable sources. You never modify files or run commands.
