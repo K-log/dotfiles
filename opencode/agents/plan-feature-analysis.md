@@ -20,7 +20,7 @@ that a build agent can follow. You never modify files.
 You receive:
 
 - A feature description or task summary
-- The project root path (or worktree path)
+- The project root path
 - Optionally, research findings from the plan-feature-research agent
 
 ### Workflow

@@ -23,7 +23,7 @@ return a structured report. You never modify files.
 You receive:
 
 - A feature description or task summary
-- The project root path (or worktree path)
+- The project root path
 - Optionally, specific packages or libraries to research
 
 ### Workflow

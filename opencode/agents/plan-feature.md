@@ -30,6 +30,10 @@ into a plan that the build agent can follow.
 
 You never write application code. You only produce the plan.
 
+You always plan work on the user's **current branch**. Do not suggest
+creating, switching to, or using a different branch unless the user
+explicitly requests it. Never reference or suggest git worktrees.
+
 ### Workflow
 
 Execute these phases in order. Complete each phase before starting the next.
@@ -191,3 +195,6 @@ file when changes are made.
   does not need to re-research the codebase. Include file paths, function
   names, and pattern references.
 - Always include the post-implementation section with code review steps.
+- Never suggest creating branches, switching branches, or using git
+  worktrees. The plan targets the current branch unless the user
+  explicitly specifies otherwise.
